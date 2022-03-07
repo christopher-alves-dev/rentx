@@ -1,5 +1,6 @@
 import React from 'react';
 import AppLoading from 'expo-app-loading';
+import 'react-native-gesture-handler';
 import { ThemeProvider } from 'styled-components'
 import {
   Archivo_400Regular,
@@ -12,7 +13,8 @@ import {
   Inter_500Medium
 } from '@expo-google-fonts/inter'
 import theme from './src/styles/theme'
-import { Home } from './src/screens/Home';
+
+import { Routes } from './src/routes';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -29,7 +31,7 @@ export default function App() {
 
   return ( 
     <ThemeProvider theme={theme}>
-      <Home />
+      <Routes />
     </ThemeProvider>
   )
 }
