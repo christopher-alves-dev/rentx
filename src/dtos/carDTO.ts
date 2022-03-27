@@ -3,15 +3,17 @@ export interface CarDTO {
   brand: string;
   name: string;
   about: string;
-  rent: {
-    period: string;
-    price: number;
-  },
   fuel_type: string;
   thumbnail: string;
+  period: string;
+  price: number;
   accessories: {
+    id: string;
     type: 'speed' | 'acceleration' | 'turning_diameter' | 'electric_motor' | 'exchange' | 'seats'
     name: 'string'
   }[],  
-  photos: string[];
+  photos: {
+    id: string;
+    photo: string;
+  }[]
 }

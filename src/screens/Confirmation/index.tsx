@@ -2,7 +2,7 @@ import React from 'react'
 import { StatusBar, useWindowDimensions } from 'react-native';
 //Dimension se usa em components styled components
 //o Hook useWindowDimensions é um hook, então só podemos utilizá-lo em componente que retorne algo (jsx).
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation, useRoute } from '@react-navigation/native'
 
 import LogoSvg from '../../assets/images/logo_background_gray.svg';
 import DoneSvg from '../../assets/images/done.svg';
@@ -16,12 +16,20 @@ import {
 } from './styles'
 import { ConfirmButton } from '../../components/ConfirmButton';
 
-export const ScheduleComplete = () => {
+interface Params {
+  title: string;
+  message: string;
+  nextScreenRoute: string;
+}
+
+export const Confirmation = () => {
   const { width } = useWindowDimensions()
-  const navigation = useNavigation();
+  const navigation = useNavigation<any>();
+  const route = useRoute();
+  const { title, message, nextScreenRoute } = route.params as Params;
 
   const handleConfirm = () => {
-    navigation.navigate('Home' as any);
+    navigation.navigate(nextScreenRoute);
   }
 
   return(
@@ -40,12 +48,16 @@ export const ScheduleComplete = () => {
           width={80}
           height={80}
         />
-        <Title>Carro alugado!</Title>
+        <Title>
+          {title}
+          {/* Carro alugado! */}
+        </Title>
 
         <Message>
-          Agora você só precisa ir {'\n'}
+          {message}
+          {/* Agora você só precisa ir {'\n'}
           até a concessionária da RENTX {'\n'}
-          pegar o seu automóvel.
+          pegar o seu automóvel. */}
         </Message>
       </Content>
       <Footer>

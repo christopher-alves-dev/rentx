@@ -61,7 +61,7 @@ export const ScheduleDetails = () => {
   const [rentalPeriod, setRentalPeriod] = useState<RentalPeriod>({} as RentalPeriod)
   const [loading, setLoading] = useState(false)
 
-  const rentTotalPrice = Number(dates.length * car.rent.price);
+  const rentTotalPrice = Number(dates.length * car.price);
 
   const handleGoBackPage = () => {
     navigation.goBack()
@@ -87,7 +87,14 @@ export const ScheduleDetails = () => {
       id: car.id,
       unavailable_dates
     })
-    .then(() => navigation.navigate('ScheduleComplete'))
+    .then(() => {
+      navigation.navigate('Confirmation', {
+        nextScreenRoute: 'Home',
+        title: 'Carro alugado!',
+        message: `Agora você só precisa ir\naté a concessionária da RENTX\npegar o seu automóvel.`,
+      })
+      
+    })
     .catch(() => {
       setLoading(false)
       Alert.alert('Não foi possível confirmar o agendamento.')
@@ -121,8 +128,8 @@ export const ScheduleDetails = () => {
           </Description>
 
           <Rent>
-            <Period>{car.rent.period}</Period>
-            <Price>R$ {car.rent.price}</Price>
+            <Period>{car.period}</Period>
+            <Price>R$ {car.price}</Price>
           </Rent>
         </Details>
 
@@ -162,7 +169,7 @@ export const ScheduleDetails = () => {
         <RentalPrice>
           <RentalPriceLabel>TOTAL</RentalPriceLabel>
           <RentalPriceDetails>
-            <RentalPriceQuota>{`R$ ${car.rent.price} x${dates.length} diárias`}</RentalPriceQuota>
+            <RentalPriceQuota>{`R$ ${car.price} x${dates.length} diárias`}</RentalPriceQuota>
             <RentalPriceTotal>R$ {rentTotalPrice}</RentalPriceTotal>
           </RentalPriceDetails>
         </RentalPrice>

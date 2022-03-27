@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { Alert, BackHandler, StatusBar, StyleSheet } from 'react-native'
+import { Alert, StatusBar, StyleSheet } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { RFValue } from 'react-native-responsive-fontsize'
-import { Ionicons } from '@expo/vector-icons';
-import { useTheme } from 'styled-components/native'
-import { PanGestureHandler, RectButton } from 'react-native-gesture-handler';
-import Animated, { useAnimatedGestureHandler, useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
+import { RectButton } from 'react-native-gesture-handler';
+import Animated,{ useSharedValue } from 'react-native-reanimated';
 
 import { LoadAnimation } from '../../components/LoadAnimation'
 import { Car } from '../../components/Car'
@@ -24,48 +22,47 @@ import {
 
 import { CarDTO } from '../../dtos/carDTO'
 
-const ButtonAnimated = Animated.createAnimatedComponent(RectButton);
+// const ButtonAnimated = Animated.createAnimatedComponent(RectButton);
 
 export const Home = () => {
   const navigation = useNavigation<any>();
-  const theme = useTheme();
   const [cars, setCars] = useState<CarDTO[]>()
   const [loading, setLoading] = useState(false)
 
-  const positionY = useSharedValue(0);
-  const positionX = useSharedValue(0);
+  // const positionY = useSharedValue(0);
+  // const positionX = useSharedValue(0);
   
-  const myCarsButtonStyle = useAnimatedStyle(() => {
-    return {
-      transform: [
-        { translateX: positionX.value },
-        { translateY: positionY.value },
-      ]
-    }
-  })
+  // const myCarsButtonStyle = useAnimatedStyle(() => {
+  //   return {
+  //     transform: [
+  //       { translateX: positionX.value },
+  //       { translateY: positionY.value },
+  //     ]
+  //   }
+  // })
 
-  const onGestureEvent = useAnimatedGestureHandler({
-    onStart(_, ctx: any){
-      ctx.positionX = positionX.value;
-      ctx.positionY = positionY.value;
-    },
-    onActive(event, ctx: any){
-      positionX.value = ctx.positionX + event.translationX;
-      positionY.value = ctx.positionY + event.translationY;
-    },
-    onEnd(){
-      positionX.value = withSpring(0);
-      positionY.value = withSpring(0);
-    }
-  })
+  // const onGestureEvent = useAnimatedGestureHandler({
+  //   onStart(_, ctx: any){
+  //     ctx.positionX = positionX.value;
+  //     ctx.positionY = positionY.value;
+  //   },
+  //   onActive(event, ctx: any){
+  //     positionX.value = ctx.positionX + event.translationX;
+  //     positionY.value = ctx.positionY + event.translationY;
+  //   },
+  //   onEnd(){
+  //     positionX.value = withSpring(0);
+  //     positionY.value = withSpring(0);
+  //   }
+  // })
 
   const handleCarDetails = (car: CarDTO) => {
     navigation.navigate('CarDetails', { car });
   }
 
-  const handleOpenMyCars = (car: CarDTO) => {
-    navigation.navigate('MyCars');
-  }
+  // const handleOpenMyCars = (car: CarDTO) => {
+  //   navigation.navigate('MyCars');
+  // }
 
   useEffect(() => {
     const fetchCars = async () => {
@@ -83,10 +80,11 @@ export const Home = () => {
     fetchCars()
   }, [])
 
-  useEffect(() => {
-    BackHandler.addEventListener('hardwareBackPress', () => true); // Previne que ao clicar no botão de voltar (Aquele lá embaixo que é da navegação do celular) no android, ele retorne para tela de splash
-    // Para ter prevenir esse comportamento no iOS, precisa adicionar o getureEnabled: false nas Screens do projeto (stack.routes.tsx)
-  }, []) 
+  // Agora com as rotas de autenticação não é mais necessário esse prevenção. 
+  // useEffect(() => {
+  //   BackHandler.addEventListener('hardwareBackPress', () => true); // Previne que ao clicar no botão de voltar (Aquele lá embaixo que é da navegação do celular) no android, ele retorne para tela de splash
+  //   // Para ter prevenir esse comportamento no iOS, precisa adicionar o getureEnabled: false nas Screens do projeto (stack.routes.tsx)
+  // }, []) 
   
   return (
     <Container>
@@ -120,7 +118,9 @@ export const Home = () => {
           />
         )}
       
-      <PanGestureHandler onGestureEvent={onGestureEvent}>
+
+      {/* Com o Tab Navigation, não é mais necessário este botão para acessar a página de my cars.  */}
+      {/* <PanGestureHandler onGestureEvent={onGestureEvent}>
         <Animated.View
           style={[
             myCarsButtonStyle, 
@@ -139,17 +139,7 @@ export const Home = () => {
             />
           </ButtonAnimated>
         </Animated.View>
-      </PanGestureHandler>
+      </PanGestureHandler> */}
     </Container>
   )
 }
-
-const styles = StyleSheet.create({
-  button: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    justifyContent: 'center',
-    alignItems: 'center'
-  }
-})
