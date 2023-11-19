@@ -34,12 +34,12 @@ import {
 } from './styles';
 
 export function Profile() {
-  const { user } = useAuth();
+  const { user,signOut } = useAuth();
 
   const [option, setOption] = useState<'dataEdit' | 'passwordEdit'>('dataEdit');
-  const [avatar, setAvatar] = useState(user.avatar);
-  const [name, setName] = useState(user.name);
-  const [driverLicense, setDriverLicense] = useState(user.driver_license);
+  const [avatar, setAvatar] = useState(user?.avatar);
+  const [name, setName] = useState(user?.name);
+  const [driverLicense, setDriverLicense] = useState(user?.driver_license);
 
   // const netInfo = useNetInfo();
 
@@ -138,9 +138,7 @@ export function Profile() {
                 onPress={handleBack}
               />
               <HeaderTitle>Editar Perfil</HeaderTitle>
-              <LogoutButton onPress={() => console.log('handleSignOut')
-                // handleSignOut
-                }>
+              <LogoutButton onPress={signOut}>
                 <Feather
                   name="power" size={24}
                   color={theme.colors.shape}
@@ -194,19 +192,19 @@ export function Profile() {
                     iconName="user"
                     placeholder="Nome"
                     autoCorrect={false}
-                    defaultValue={user.name}
+                    defaultValue={user?.name}
                     onChangeText={setName}
                   />
                   <Input
                     iconName="mail"
                     editable={false}
-                    defaultValue={user.email}
+                    defaultValue={user?.email}
                   />
                   <Input
                     iconName="credit-card"
                     placeholder="CNH"
                     keyboardType="numeric"
-                    defaultValue={user.driver_license}
+                    defaultValue={user?.driver_license}
                     onChangeText={setDriverLicense}
                   />
                 </Section>

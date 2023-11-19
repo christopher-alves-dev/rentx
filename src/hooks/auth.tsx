@@ -29,8 +29,9 @@ interface SignInCredentials {
 }
 
 interface AuthContextData {
-  user: User;
+  user: User | undefined;
   signIn: (credentials: SignInCredentials) => Promise<void>;
+  signOut: () => void;
 }
 
 interface AuthProveiderProps {
@@ -40,7 +41,7 @@ interface AuthProveiderProps {
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
 const AuthProvider = ({ children }: AuthProveiderProps) => {
-  const [data, setData] = useState<AuthState>({} as AuthState);
+  const [data, setData] = useState<AuthState | undefined>(undefined);
 
   const signIn = async ({ email, password }: SignInCredentials) => {
     try {
@@ -67,11 +68,16 @@ const AuthProvider = ({ children }: AuthProveiderProps) => {
     }
   }
 
+  const signOut = () => {
+    setData(undefined)
+  }
+
   return (
     <AuthContext.Provider
       value={{
-        user: data.user,
-        signIn
+        user: data?.user,
+        signIn,
+        signOut
       }}
     >
       {children}
