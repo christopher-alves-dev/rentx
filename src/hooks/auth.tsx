@@ -6,6 +6,9 @@ import React, {
 } from 'react';
 
 import api from '../services/api';
+import { Alert } from 'react-native';
+import Toast from 'react-native-root-toast';
+import * as Yup from 'yup';
 
 interface User {
   id: string;
@@ -40,14 +43,28 @@ const AuthProvider = ({ children }: AuthProveiderProps) => {
   const [data, setData] = useState<AuthState>({} as AuthState);
 
   const signIn = async ({ email, password }: SignInCredentials) => {
-    const response = await api.post('/sessions', {
-      email, 
-      password
-    })
-
-    const { token, user } = response.data;
-    api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-    setData({ token, user })
+    try {
+      const response = await api.post('/login', {
+        email,
+        password
+      })
+      
+      const { token, user } = response.data;
+      api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      setData({ token, user })
+      
+    } catch (error) {
+      
+      if (error instanceof Yup.ValidationError) {
+        Alert.alert('Opa', error.message);
+      } else {
+        Toast.show('Email ou Senha inválida.', {
+          duration: Toast.durations.SHORT,
+          position: Toast.positions.CENTER,
+          backgroundColor: 'red'
+        })
+      }
+    }
   }
 
   return (

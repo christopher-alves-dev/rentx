@@ -9,7 +9,7 @@
         "period": "Ao dia",
         "price": 120
       },
-      "fuel_type": "electric",
+      "fuel_type": "electric_motor",
       "thumbnail": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/1.png",
       "accessories": [
         {
@@ -453,7 +453,7 @@
           "period": "Ao dia",
           "price": 120
         },
-        "fuel_type": "electric",
+        "fuel_type": "electric_motor",
         "thumbnail": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/1.png",
         "accessories": [
           {
@@ -1185,7 +1185,7 @@
           "period": "Ao dia",
           "price": 120
         },
-        "fuel_type": "electric",
+        "fuel_type": "electric_motor",
         "thumbnail": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/1.png",
         "accessories": [
           {
@@ -1222,6 +1222,15 @@
       "startDate": "26/03/2022",
       "endDate": "29/03/2022",
       "id": 17
+    }
+  ],
+  "users": [
+    {
+      "email": "Chrisalves@gmail.com",
+      "password": "$2a$10$eNPpsVbzDWy7eeYGyzi1iu8xgG0LBcAxRdFU0QeCQszK3i6xpXIXe",
+      "name": "Christopher Alves",
+      "driver_license": "123456789",
+      "id": 1
     }
   ]
 }

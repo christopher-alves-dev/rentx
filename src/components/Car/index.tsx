@@ -30,8 +30,8 @@ export const Car = ({ data, ...rest }: Props) => {
         <Name>{data.name}</Name>
         <About>
           <Rent>
-            <Period>{data.period}</Period>
-            <Price>R$ {data.price}</Price>
+            <Period>{data.rent.period}</Period>
+            <Price>R$ {data.rent.price}</Price>
           </Rent>
 
           <Type>

@@ -1,12 +1,12 @@
+import { MaterialIcons } from '@expo/vector-icons';
 import React from 'react';
-import { MaterialIcons} from '@expo/vector-icons'
-import { useTheme } from 'styled-components'
-import { BorderlessButtonProps } from 'react-native-gesture-handler'
+import { BorderlessButtonProps } from 'react-native-gesture-handler';
+import { useTheme } from 'styled-components';
 
 
 import {
   Container
-} from './styles'
+} from './styles';
 
 interface Props extends BorderlessButtonProps {
   color?: string;
