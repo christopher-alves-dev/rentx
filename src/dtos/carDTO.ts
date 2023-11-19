@@ -7,7 +7,7 @@ export interface CarDTO {
   thumbnail: string;
   rent: {
     period: string;
-    price: string;
+    price: number;
   }
   accessories: {
     id: string;
