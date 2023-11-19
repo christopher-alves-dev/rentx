@@ -1,40 +1,34 @@
-import { useNavigation } from '@react-navigation/native';
-import React, { useEffect, useState } from 'react';
-import { FlatList, StatusBar } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
+import React, { useCallback, useState } from 'react';
+import { FlatList, StatusBar } from 'react-native';
 import { BackButton } from '../../components/BackButton';
 import { Car } from '../../components/Car';
-import { CarDTO } from '../../dtos/carDTO';
 import api from '../../services/api';
 import theme from '../../styles/theme';
 
-import { 
-  Container, 
-  Header,
-  Title, 
-  Subtitle,
-  Content,
-  Appointments,
-  AppointmentsTitle,
-  AppointmentsQuantity,
-  CarWrapper,
-  CarFooter,
-  CarFooterTitle,
-  CarFooterPeriod,
-  CarFooterDate,
-} from './styles';
 import { LoadAnimation } from '../../components/LoadAnimation';
+import { SchedulesByUser } from '../../dtos/scheduleByUserDTO';
+import {
+  Appointments,
+  AppointmentsQuantity,
+  AppointmentsTitle,
+  CarFooter,
+  CarFooterDate,
+  CarFooterPeriod,
+  CarFooterTitle,
+  CarWrapper,
+  Container,
+  Content,
+  Header,
+  Subtitle,
+  Title,
+} from './styles';
 
-interface CarProps {
-  id: string;
-  user_id: string;
-  car: CarDTO;
-  startDate: string;
-  endDate: string;
-}
+type CarProps = SchedulesByUser[]
 
 export const MyCars = () => {
-  const [cars, setCars] = useState<CarProps[]>([]);
+  const [cars, setCars] = useState<CarProps>([]);
   const [loading, setLoading] = useState(true);
 
   const navigation = useNavigation()
@@ -43,11 +37,12 @@ export const MyCars = () => {
     navigation.goBack()
   }
 
-  useEffect(() => {
+  useFocusEffect(useCallback(() => {
     async function fetchCars() {
       try {
-        const response = await api.get('/schedules_byuser?user_id=1')
-        setCars(response.data)
+        const response = await api.get<SchedulesByUser[]>('/schedules_byuser?user_id=1')
+        setCars(response.data.sort((a, b) => b.id - a.id))
+
       } catch (error) {
         console.log(error)
       } finally {
@@ -55,7 +50,7 @@ export const MyCars = () => {
       }
     }
     fetchCars()
-  }, [])
+  }, []))
 
   return (
     <Container>
@@ -87,12 +82,12 @@ export const MyCars = () => {
         : <Content>
             <Appointments>
               <AppointmentsTitle>Agendamentos feitos</AppointmentsTitle>
-              <AppointmentsQuantity>05</AppointmentsQuantity>
+              <AppointmentsQuantity>{cars?.length ?? 0}</AppointmentsQuantity>
             </Appointments>
 
             <FlatList 
               data={cars}
-              keyExtractor={item => item.id}
+              keyExtractor={item => String(item.id)}
               showsVerticalScrollIndicator={false}
               renderItem={({ item }) => (
                 <CarWrapper>

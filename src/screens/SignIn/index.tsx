@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
-import { Keyboard, KeyboardAvoidingView, StatusBar, TouchableWithoutFeedback, Alert, Platform } from 'react-native';
+import { Keyboard, StatusBar, TouchableWithoutFeedback } from 'react-native';
 import { useTheme } from 'styled-components/native';
 import * as Yup from 'yup';
 
@@ -9,7 +9,7 @@ import { Input } from '../../components/Input';
 import { PasswordInput } from '../../components/PasswordInput';
 import { useAuth } from '../../hooks/auth';
 
-import { Container, Header, Title, Subtitle, Form, Footer } from './styles';
+import { Container, Footer, Form, Header, Subtitle, Title } from './styles';
 
 export const SignIn = () => {
   const [email, setEmail] = useState('')
