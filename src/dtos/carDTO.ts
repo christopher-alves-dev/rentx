@@ -10,7 +10,6 @@ export interface CarDTO {
     price: number;
   }
   accessories: {
-    id: string;
     type: 'speed' | 'acceleration' | 'turning_diameter' | 'electric_motor' | 'exchange' | 'seats'
     name: 'string'
   }[],  
