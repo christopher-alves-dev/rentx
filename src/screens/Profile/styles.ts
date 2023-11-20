@@ -100,4 +100,18 @@ export const OptionTitle = styled.Text<OptionProps> `
 `;
 
 
+export const BottomSheetTitle = styled.Text`
+  font-size: ${RFValue(20)}px;
+  font-family: ${({ theme }) => theme.fonts.secondary_600};
+  color: ${({ theme }) => theme.colors.header};
+`;
+
+export const BottomSheetMessage = styled.Text`
+  font-size: ${RFValue(16)}px;
+  font-family: ${({ theme }) => theme.fonts.secondary_500};
+  color: ${({ theme }) => theme.colors.text_detail};
+
+  margin: ${RFValue(16)}px 0;
+`;
+
 export const Section = styled.View``;
