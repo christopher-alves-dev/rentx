@@ -1,16 +1,15 @@
+import { Feather } from '@expo/vector-icons';
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 import { useNavigation } from '@react-navigation/core';
-import React, { useRef, useState } from 'react';
+import { compareSync } from 'bcryptjs';
+import React, { useCallback, useMemo, useRef, useState } from 'react';
 import {
   Alert,
   Keyboard,
   KeyboardAvoidingView,
-  Button as RNButton,
   TouchableWithoutFeedback,
   View
 } from 'react-native';
-import { Feather } from '@expo/vector-icons';
-import { compareSync } from 'bcryptjs';
 import Toast from 'react-native-root-toast';
 import { useTheme } from 'styled-components';
 import { useAuth } from '../../hooks/auth';
@@ -20,7 +19,7 @@ import { Button } from '../../components/Button';
 import { Input } from '../../components/Input';
 import { PasswordInput } from '../../components/PasswordInput';
 
-import { Modalize } from 'react-native-modalize';
+import BottomSheet, { BottomSheetBackdrop, BottomSheetBackdropProps } from '@gorhom/bottom-sheet';
 import { RFValue } from 'react-native-responsive-fontsize';
 import api from '../../services/api';
 import {
@@ -40,6 +39,7 @@ import {
   PhotoContainer,
   Section
 } from './styles';
+import { BottomSheetPasswordInput } from '../../components/BottomSheetPasswordInput';
 
 export function Profile() {
   const { user, signOut } = useAuth();
@@ -49,10 +49,12 @@ export function Profile() {
   const [password, setPassword] = useState('');
   const [name, setName] = useState(user?.name);
   const [driverLicense, setDriverLicense] = useState(user?.driverLicense);
-  const modalizeRef = useRef<Modalize>(null);
-
+  const bottomSheetRef = useRef<BottomSheet>(null);
+  const snapPoints = useMemo(() => ['40%'], []);
+  
   const onOpen = () => {
-    modalizeRef.current?.open();
+    console.log('abree')
+    bottomSheetRef.current?.expand();
   };
   console.log({ user })
 
@@ -76,17 +78,18 @@ export function Profile() {
       return
     }
     try {
-      const data = { name, driverLicense, email: user?.email, id: user?.id, password };
+      // const data = { name, driverLicense, email: user?.email, id: user?.id, password };
 
-      api.put('/users/1', data)
+      // api.put('/users/1', data)
 
-      Toast.show('Informações atualizadas com sucesso', {
-        duration: Toast.durations.SHORT,
-        position: Toast.positions.CENTER,
-        backgroundColor: theme.colors.success
-      })
+      // Toast.show('Informações atualizadas com sucesso', {
+      //   duration: Toast.durations.SHORT,
+      //   position: Toast.positions.CENTER,
+      //   backgroundColor: theme.colors.success
+      // })
 
-      modalizeRef.current?.close();
+      Keyboard.dismiss()
+      bottomSheetRef.current?.close();
     } catch (error) {
       Alert.alert('Erro');
 
@@ -97,6 +100,17 @@ export function Profile() {
       })
     }
   }
+
+  const renderBackdrop = useCallback(
+    (props: BottomSheetBackdropProps) => (
+      <BottomSheetBackdrop
+        {...props}
+        disappearsOnIndex={-1}
+        appearsOnIndex={0}
+      />
+    ),
+    []
+  );
 
   return (
     <>
@@ -203,13 +217,15 @@ export function Profile() {
               />
             </Content>
 
-
           </Container>
         </TouchableWithoutFeedback>
       </KeyboardAvoidingView>
-      <Modalize
-        ref={modalizeRef}
-        adjustToContentHeight
+      <BottomSheet
+        ref={bottomSheetRef}
+        index={-1}
+        snapPoints={snapPoints}
+        enablePanDownToClose
+        backdropComponent={renderBackdrop}
       >
         <View style={{
           padding: RFValue(20),
@@ -218,28 +234,25 @@ export function Profile() {
           <BottomSheetTitle>Confirmar alteração</BottomSheetTitle>
           <BottomSheetMessage>Digite sua senha para confirmar as alterações.</BottomSheetMessage>
 
-          <PasswordInput
+          <BottomSheetPasswordInput
             iconName="lock"
             placeholder="Senha"
             onChangeText={setPassword}
             value={password}
           />
 
-
           <View style={{
             marginTop: RFValue(16),
             width: '100%'
           }}>
-            {/* Verificar pq não está funcionando os botões do gesture handler no modalize */}
-            <RNButton title='Confirmar' onPress={handleProfileUpdate} />
-
-            {/* <Button
+            <Button
               title="Confirmar"
-              onPress={() => console.log('cliquei')}
-            /> */}
+              onPress={handleProfileUpdate}
+            />
           </View>
         </View>
-      </Modalize>
+    </BottomSheet >
+
     </>
   );
 }
