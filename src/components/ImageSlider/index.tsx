@@ -3,17 +3,14 @@ import { FlatList, ViewToken } from 'react-native';
 import { Bullet } from '../Bullet';
 
 import {
+  CarImage,
+  CarImageWrapper,
   Container,
   ImageIndexes,
-  CarImageWrapper,
-  CarImage,
-} from './styles'
+} from './styles';
 
 interface Props {
-  imagesUrl: {
-    id: string;
-    photo: string;
-  }[];
+  imagesUrl: string[]
 }
 
 interface ChangeImageProps {
@@ -21,8 +18,8 @@ interface ChangeImageProps {
   changed: ViewToken[];
 }
 
-export const ImageSlider = ({ 
-  imagesUrl 
+export const ImageSlider = ({
+  imagesUrl
 }: Props) => {
   const [imageIndex, setImageIndex] = useState(0);
 
@@ -34,32 +31,34 @@ export const ImageSlider = ({
   return (
     <Container>
       <ImageIndexes>
-        {imagesUrl.map((_, index) => (
-          <Bullet 
-            key={index} 
-            active={index === imageIndex} 
-          />
-        ))}
+        {imagesUrl.map((item, index) => {
+          return (
+            <Bullet
+              key={item}
+              active={index === imageIndex}
+            />
+          )
+        })}
 
       </ImageIndexes>
 
-  
-        <FlatList
-          data={imagesUrl}
-          keyExtractor={item => item.id}
-          renderItem={({item}) => (
-            <CarImageWrapper>
-              <CarImage 
-                source={{ uri: item.photo }}
-                resizeMode="contain"
-              />
-            </CarImageWrapper>
-          )}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          onViewableItemsChanged={indexChanged.current}
-        />
-        
+      <FlatList
+        data={imagesUrl}
+        keyExtractor={item => item}
+        pagingEnabled
+        renderItem={({ item }) => (
+          <CarImageWrapper>
+            <CarImage
+              source={{ uri: item }}
+              resizeMode="contain"
+            />
+          </CarImageWrapper>
+        )}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        onViewableItemsChanged={indexChanged.current}
+      />
+
     </Container>
 
   )

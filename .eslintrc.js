@@ -1,12 +1,9 @@
+// eslint-disable-next-line no-undef
 module.exports = {
     root: true,
     parser: '@typescript-eslint/parser',
-    env: {
-      'react-native/react-native': true,
-    },
     plugins: ['@typescript-eslint'],
     extends: [
-      '@react-native-community',
       'eslint:recommended',
       'plugin:@typescript-eslint/recommended',
       'plugin:react-hooks/recommended',
@@ -27,7 +24,6 @@ module.exports = {
       'react/react-in-jsx-scope': 'off',
       'react-hooks/exhaustive-deps': 'off',
       'react-native/no-inline-styles': 0,
-      'prettier/prettier': 'error',
       'space-before-function-paren': 'off',
       'react/prop-types': 'off',
       'multiline-ternary': 'off',

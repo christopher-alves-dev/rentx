@@ -19,7 +19,7 @@ import {
   Brand,
   Name,
   Rent,
-  Period, 
+  Period,
   Price,
   About,
   Accessories,
@@ -42,13 +42,12 @@ export const CarDetails = () => {
   const scrollY = useSharedValue(0);
   const scrollhandler = useAnimatedScrollHandler(event => {
     scrollY.value = event.contentOffset.y
-    console.log(event.contentOffset.y)
   })
 
   const headerStyleAnimation = useAnimatedStyle(() => {
     return {
       height: interpolate(
-        scrollY.value, 
+        scrollY.value,
         [0, 200],
         [200, 80],
         Extrapolate.CLAMP
@@ -77,7 +76,7 @@ export const CarDetails = () => {
 
   return (
     <Container>
-      <StatusBar 
+      <StatusBar
         barStyle='dark-content'
         translucent
         backgroundColor='transparent'
@@ -86,12 +85,6 @@ export const CarDetails = () => {
       <Animated.View
         style={[headerStyleAnimation, styles.header, { backgroundColor: theme.colors.background_secondary }]}
       >
-        <Header>
-          <BackButton 
-            onPress={handleGoBackPage}
-          />
-        </Header>
-
         <Animated.View
           style={sliderCarsStyleAnimation}
         >
@@ -100,6 +93,12 @@ export const CarDetails = () => {
           </CarImages>
 
         </Animated.View>
+
+        <Header>
+          <BackButton
+            onPress={handleGoBackPage}
+          />
+        </Header>
       </Animated.View>
 
       <Animated.ScrollView
@@ -109,7 +108,7 @@ export const CarDetails = () => {
         }}
         showsVerticalScrollIndicator={false}
         onScroll={scrollhandler}
-        scrollEventThrottle={16} // animação de 60fps - 1000 milisegundos / 60 frames = 16,66666
+        scrollEventThrottle={16}
       >
         <Details>
           <Description>
@@ -118,17 +117,17 @@ export const CarDetails = () => {
           </Description>
 
           <Rent>
-            <Period>{car.period}</Period>
-            <Price>R$ {car.price}</Price>
+            <Period>{car.rent.period}</Period>
+            <Price>R$ {car.rent.price}</Price>
           </Rent>
         </Details>
 
         <Accessories>
           {car.accessories.map(accessory => (
-            <Accessory 
+            <Accessory
               key={accessory.type}
-              name={accessory.name} 
-              icon={getAccessoryIcon(accessory.type)} 
+              name={accessory.name}
+              icon={getAccessoryIcon(accessory.type)}
             />
 
           ))}
@@ -146,7 +145,7 @@ export const CarDetails = () => {
       </Animated.ScrollView>
 
       <Footer>
-        <Button title='Escolher período do aluguel' onPress={handleConfirmRental}/>
+        <Button title='Escolher período do aluguel' onPress={handleConfirmRental} />
       </Footer>
     </Container>
   )

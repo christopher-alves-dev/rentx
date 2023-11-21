@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-
+import { RootSiblingParent } from 'react-native-root-siblings';
 import { AuthProvider } from './auth';
 
 interface AppProviderProps {
@@ -8,9 +8,11 @@ interface AppProviderProps {
 
 const AppProvider = ({ children }: AppProviderProps) => {
   return (
-    <AuthProvider>
-      {children}
-    </AuthProvider>
+    <RootSiblingParent>
+      <AuthProvider>
+        {children}
+      </AuthProvider>
+    </RootSiblingParent>
   )
 }
 
