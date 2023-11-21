@@ -14,10 +14,10 @@ export const generateInterval = (start: DayProps, end: DayProps) => {
       ...interval,
       [date]: {
         color: start.dateString === date || end.dateString === date
-          ? theme.colors.main : theme.colors.main_light,
+          ? theme.colors.main : theme.colors.mainLight,
         
         textColor: start.dateString === date || end.dateString === date
-        ? theme.colors.main_light : theme.colors.main,
+        ? theme.colors.mainLight : theme.colors.main,
       }
     }
   })

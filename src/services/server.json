@@ -9,7 +9,7 @@
         "period": "Ao dia",
         "price": 120
       },
-      "fuel_type": "electric_motor",
+      "fuelType": "electricMotor",
       "thumbnail": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/1.png",
       "accessories": [
         {
@@ -21,11 +21,11 @@
           "name": "3.8s"
         },
         {
-          "type": "turning_diameter",
+          "type": "turningDiameter",
           "name": "800 HP"
         },
         {
-          "type": "electric_motor",
+          "type": "electricMotor",
           "name": "Elétrico"
         },
         {
@@ -52,7 +52,7 @@
         "period": "Ao dia",
         "price": 340
       },
-      "fuel_type": "gasoline_motor",
+      "fuelType": "gasolineMotor",
       "thumbnail": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/2.png",
       "accessories": [
         {
@@ -64,11 +64,11 @@
           "name": "2.9s"
         },
         {
-          "type": "turning_diameter",
+          "type": "turningDiameter",
           "name": "700 HP"
         },
         {
-          "type": "gasoline_motor",
+          "type": "gasolineMotor",
           "name": "Gasoline"
         },
         {
@@ -94,7 +94,7 @@
         "period": "Ao dia",
         "price": 620
       },
-      "fuel_type": "gasoline_motor",
+      "fuelType": "gasolineMotor",
       "thumbnail": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/3.png",
       "accessories": [
         {
@@ -106,11 +106,11 @@
           "name": "6.2s"
         },
         {
-          "type": "turning_diameter",
+          "type": "turningDiameter",
           "name": "900 HP"
         },
         {
-          "type": "gasoline_motor",
+          "type": "gasolineMotor",
           "name": "Gasoline"
         },
         {
@@ -137,7 +137,7 @@
         "period": "Ao dia",
         "price": 120
       },
-      "fuel_type": "electric_motor",
+      "fuelType": "electricMotor",
       "thumbnail": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/4.png",
       "accessories": [
         {
@@ -149,11 +149,11 @@
           "name": "3.2s"
         },
         {
-          "type": "turning_diameter",
+          "type": "turningDiameter",
           "name": "800 HP"
         },
         {
-          "type": "electric_motor",
+          "type": "electricMotor",
           "name": "Elétrico"
         },
         {
@@ -180,7 +180,7 @@
         "period": "Ao dia",
         "price": 120
       },
-      "fuel_type": "gasoline_motor",
+      "fuelType": "gasolineMotor",
       "thumbnail": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/5.png",
       "accessories": [
         {
@@ -192,11 +192,11 @@
           "name": "1.5s"
         },
         {
-          "type": "turning_diameter",
+          "type": "turningDiameter",
           "name": "600 HP"
         },
         {
-          "type": "gasoline_motor",
+          "type": "gasolineMotor",
           "name": "Gasolina"
         },
         {
@@ -223,7 +223,7 @@
         "period": "Ao dia",
         "price": 220
       },
-      "fuel_type": "hybrid_motor",
+      "fuelType": "hybridMotor",
       "thumbnail": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/6.png",
       "accessories": [
         {
@@ -235,11 +235,11 @@
           "name": "2.0s"
         },
         {
-          "type": "turning_diameter",
+          "type": "turningDiameter",
           "name": "600 HP"
         },
         {
-          "type": "hybrid_motor",
+          "type": "hybridMotor",
           "name": "Híbrido"
         },
         {
@@ -258,10 +258,10 @@
       ]
     }
   ],
-  "schedules_bycars": [
+  "schedulesByCars": [
     {
       "id": "535e8de8-721b-4bac-8b72-7d29be7da467",
-      "unavailable_dates": [
+      "unavailableDates": [
         "2021-06-01",
         "2021-06-02",
         "2021-06-09",
@@ -299,7 +299,7 @@
     },
     {
       "id": "ffb71f55-818a-48b1-b7d2-2efc406ede25",
-      "unavailable_dates": [
+      "unavailableDates": [
         "2021-06-15",
         "2021-06-16",
         "2021-06-17",
@@ -336,7 +336,7 @@
     },
     {
       "id": "52930821-cbea-4b05-9f45-7c02b1bb0d8c",
-      "unavailable_dates": [
+      "unavailableDates": [
         "2021-08-01",
         "2021-08-21",
         "2021-08-22",
@@ -358,7 +358,7 @@
     },
     {
       "id": "49983f6c-a46a-4dfd-a86e-425b8c72e086",
-      "unavailable_dates": [
+      "unavailableDates": [
         "2021-06-19",
         "2021-06-20",
         "2021-06-21"
@@ -366,7 +366,7 @@
     },
     {
       "id": "508e7193-0078-4615-9071-920b59038fda",
-      "unavailable_dates": [
+      "unavailableDates": [
         "2021-06-01",
         "2021-06-02",
         "2021-06-03",
@@ -390,16 +390,16 @@
     },
     {
       "id": "59626707-88c5-4877-9350-07f372c0905a",
-      "unavailable_dates": [
+      "unavailableDates": [
         "2021-06-28",
         "2021-06-29",
         "2022-03-24"
       ]
     }
   ],
-  "schedules_byuser": [
+  "schedulesByUser": [
     {
-      "user_id": 1,
+      "userId": 1,
       "car": {
         "id": "ffb71f55-818a-48b1-b7d2-2efc406ede25",
         "brand": "Porsche",
@@ -409,7 +409,7 @@
           "period": "Ao dia",
           "price": 340
         },
-        "fuel_type": "gasoline_motor",
+        "fuelType": "gasolineMotor",
         "thumbnail": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/2.png",
         "accessories": [
           {
@@ -421,11 +421,11 @@
             "name": "2.9s"
           },
           {
-            "type": "turning_diameter",
+            "type": "turningDiameter",
             "name": "700 HP"
           },
           {
-            "type": "gasoline_motor",
+            "type": "gasolineMotor",
             "name": "Gasoline"
           },
           {
@@ -447,7 +447,7 @@
       "id": 1
     },
     {
-      "user_id": 1,
+      "userId": 1,
       "car": {
         "id": "535e8de8-721b-4bac-8b72-7d29be7da467",
         "brand": "Audi",
@@ -457,7 +457,7 @@
           "period": "Ao dia",
           "price": 120
         },
-        "fuel_type": "electric_motor",
+        "fuelType": "electricMotor",
         "thumbnail": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/1.png",
         "accessories": [
           {
@@ -469,11 +469,11 @@
             "name": "3.8s"
           },
           {
-            "type": "turning_diameter",
+            "type": "turningDiameter",
             "name": "800 HP"
           },
           {
-            "type": "electric_motor",
+            "type": "electricMotor",
             "name": "Elétrico"
           },
           {
@@ -496,7 +496,7 @@
       "id": 2
     },
     {
-      "user_id": 1,
+      "userId": 1,
       "car": {
         "id": "ffb71f55-818a-48b1-b7d2-2efc406ede25",
         "brand": "Porsche",
@@ -506,7 +506,7 @@
           "period": "Ao dia",
           "price": 340
         },
-        "fuel_type": "gasoline_motor",
+        "fuelType": "gasolineMotor",
         "thumbnail": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/2.png",
         "accessories": [
           {
@@ -518,11 +518,11 @@
             "name": "2.9s"
           },
           {
-            "type": "turning_diameter",
+            "type": "turningDiameter",
             "name": "700 HP"
           },
           {
-            "type": "gasoline_motor",
+            "type": "gasolineMotor",
             "name": "Gasoline"
           },
           {
@@ -544,7 +544,7 @@
       "id": 3
     },
     {
-      "user_id": 1,
+      "userId": 1,
       "car": {
         "id": "ffb71f55-818a-48b1-b7d2-2efc406ede25",
         "brand": "Porsche",
@@ -554,7 +554,7 @@
           "period": "Ao dia",
           "price": 340
         },
-        "fuel_type": "gasoline_motor",
+        "fuelType": "gasolineMotor",
         "thumbnail": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/2.png",
         "accessories": [
           {
@@ -566,11 +566,11 @@
             "name": "2.9s"
           },
           {
-            "type": "turning_diameter",
+            "type": "turningDiameter",
             "name": "700 HP"
           },
           {
-            "type": "gasoline_motor",
+            "type": "gasolineMotor",
             "name": "Gasoline"
           },
           {
@@ -592,7 +592,7 @@
       "id": 4
     },
     {
-      "user_id": 1,
+      "userId": 1,
       "car": {
         "id": "508e7193-0078-4615-9071-920b59038fda",
         "brand": "volvo",
@@ -602,7 +602,7 @@
           "period": "Ao dia",
           "price": 120
         },
-        "fuel_type": "gasoline_motor",
+        "fuelType": "gasolineMotor",
         "thumbnail": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/5.png",
         "accessories": [
           {
@@ -614,11 +614,11 @@
             "name": "1.5s"
           },
           {
-            "type": "turning_diameter",
+            "type": "turningDiameter",
             "name": "600 HP"
           },
           {
-            "type": "gasoline_motor",
+            "type": "gasolineMotor",
             "name": "Gasolina"
           },
           {
@@ -641,7 +641,7 @@
       "id": 5
     },
     {
-      "user_id": 1,
+      "userId": 1,
       "car": {
         "id": "508e7193-0078-4615-9071-920b59038fda",
         "brand": "volvo",
@@ -651,7 +651,7 @@
           "period": "Ao dia",
           "price": 120
         },
-        "fuel_type": "gasoline_motor",
+        "fuelType": "gasolineMotor",
         "thumbnail": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/5.png",
         "accessories": [
           {
@@ -663,11 +663,11 @@
             "name": "1.5s"
           },
           {
-            "type": "turning_diameter",
+            "type": "turningDiameter",
             "name": "600 HP"
           },
           {
-            "type": "gasoline_motor",
+            "type": "gasolineMotor",
             "name": "Gasolina"
           },
           {
@@ -690,7 +690,7 @@
       "id": 6
     },
     {
-      "user_id": 1,
+      "userId": 1,
       "car": {
         "id": "508e7193-0078-4615-9071-920b59038fda",
         "brand": "volvo",
@@ -700,7 +700,7 @@
           "period": "Ao dia",
           "price": 120
         },
-        "fuel_type": "gasoline_motor",
+        "fuelType": "gasolineMotor",
         "thumbnail": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/5.png",
         "accessories": [
           {
@@ -712,11 +712,11 @@
             "name": "1.5s"
           },
           {
-            "type": "turning_diameter",
+            "type": "turningDiameter",
             "name": "600 HP"
           },
           {
-            "type": "gasoline_motor",
+            "type": "gasolineMotor",
             "name": "Gasolina"
           },
           {
@@ -739,7 +739,7 @@
       "id": 7
     },
     {
-      "user_id": 1,
+      "userId": 1,
       "car": {
         "id": "508e7193-0078-4615-9071-920b59038fda",
         "brand": "volvo",
@@ -749,7 +749,7 @@
           "period": "Ao dia",
           "price": 120
         },
-        "fuel_type": "gasoline_motor",
+        "fuelType": "gasolineMotor",
         "thumbnail": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/5.png",
         "accessories": [
           {
@@ -761,11 +761,11 @@
             "name": "1.5s"
           },
           {
-            "type": "turning_diameter",
+            "type": "turningDiameter",
             "name": "600 HP"
           },
           {
-            "type": "gasoline_motor",
+            "type": "gasolineMotor",
             "name": "Gasolina"
           },
           {
@@ -788,7 +788,7 @@
       "id": 8
     },
     {
-      "user_id": 1,
+      "userId": 1,
       "car": {
         "id": "508e7193-0078-4615-9071-920b59038fda",
         "brand": "volvo",
@@ -798,7 +798,7 @@
           "period": "Ao dia",
           "price": 120
         },
-        "fuel_type": "gasoline_motor",
+        "fuelType": "gasolineMotor",
         "thumbnail": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/5.png",
         "accessories": [
           {
@@ -810,11 +810,11 @@
             "name": "1.5s"
           },
           {
-            "type": "turning_diameter",
+            "type": "turningDiameter",
             "name": "600 HP"
           },
           {
-            "type": "gasoline_motor",
+            "type": "gasolineMotor",
             "name": "Gasolina"
           },
           {
@@ -837,7 +837,7 @@
       "id": 9
     },
     {
-      "user_id": 1,
+      "userId": 1,
       "car": {
         "id": "508e7193-0078-4615-9071-920b59038fda",
         "brand": "volvo",
@@ -847,7 +847,7 @@
           "period": "Ao dia",
           "price": 120
         },
-        "fuel_type": "gasoline_motor",
+        "fuelType": "gasolineMotor",
         "thumbnail": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/5.png",
         "accessories": [
           {
@@ -859,11 +859,11 @@
             "name": "1.5s"
           },
           {
-            "type": "turning_diameter",
+            "type": "turningDiameter",
             "name": "600 HP"
           },
           {
-            "type": "gasoline_motor",
+            "type": "gasolineMotor",
             "name": "Gasolina"
           },
           {
@@ -886,7 +886,7 @@
       "id": 10
     },
     {
-      "user_id": 1,
+      "userId": 1,
       "car": {
         "id": "508e7193-0078-4615-9071-920b59038fda",
         "brand": "volvo",
@@ -896,7 +896,7 @@
           "period": "Ao dia",
           "price": 120
         },
-        "fuel_type": "gasoline_motor",
+        "fuelType": "gasolineMotor",
         "thumbnail": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/5.png",
         "accessories": [
           {
@@ -908,11 +908,11 @@
             "name": "1.5s"
           },
           {
-            "type": "turning_diameter",
+            "type": "turningDiameter",
             "name": "600 HP"
           },
           {
-            "type": "gasoline_motor",
+            "type": "gasolineMotor",
             "name": "Gasolina"
           },
           {
@@ -935,7 +935,7 @@
       "id": 11
     },
     {
-      "user_id": 1,
+      "userId": 1,
       "car": {
         "id": "508e7193-0078-4615-9071-920b59038fda",
         "brand": "volvo",
@@ -945,7 +945,7 @@
           "period": "Ao dia",
           "price": 120
         },
-        "fuel_type": "gasoline_motor",
+        "fuelType": "gasolineMotor",
         "thumbnail": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/5.png",
         "accessories": [
           {
@@ -957,11 +957,11 @@
             "name": "1.5s"
           },
           {
-            "type": "turning_diameter",
+            "type": "turningDiameter",
             "name": "600 HP"
           },
           {
-            "type": "gasoline_motor",
+            "type": "gasolineMotor",
             "name": "Gasolina"
           },
           {
@@ -984,7 +984,7 @@
       "id": 12
     },
     {
-      "user_id": 1,
+      "userId": 1,
       "car": {
         "id": "508e7193-0078-4615-9071-920b59038fda",
         "brand": "volvo",
@@ -994,7 +994,7 @@
           "period": "Ao dia",
           "price": 120
         },
-        "fuel_type": "gasoline_motor",
+        "fuelType": "gasolineMotor",
         "thumbnail": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/5.png",
         "accessories": [
           {
@@ -1006,11 +1006,11 @@
             "name": "1.5s"
           },
           {
-            "type": "turning_diameter",
+            "type": "turningDiameter",
             "name": "600 HP"
           },
           {
-            "type": "gasoline_motor",
+            "type": "gasolineMotor",
             "name": "Gasolina"
           },
           {
@@ -1033,7 +1033,7 @@
       "id": 13
     },
     {
-      "user_id": 1,
+      "userId": 1,
       "car": {
         "id": "508e7193-0078-4615-9071-920b59038fda",
         "brand": "volvo",
@@ -1043,7 +1043,7 @@
           "period": "Ao dia",
           "price": 120
         },
-        "fuel_type": "gasoline_motor",
+        "fuelType": "gasolineMotor",
         "thumbnail": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/5.png",
         "accessories": [
           {
@@ -1055,11 +1055,11 @@
             "name": "1.5s"
           },
           {
-            "type": "turning_diameter",
+            "type": "turningDiameter",
             "name": "600 HP"
           },
           {
-            "type": "gasoline_motor",
+            "type": "gasolineMotor",
             "name": "Gasolina"
           },
           {
@@ -1082,7 +1082,7 @@
       "id": 14
     },
     {
-      "user_id": 1,
+      "userId": 1,
       "car": {
         "id": "59626707-88c5-4877-9350-07f372c0905a",
         "brand": "mitsubishi",
@@ -1092,7 +1092,7 @@
           "period": "Ao dia",
           "price": 220
         },
-        "fuel_type": "hybrid_motor",
+        "fuelType": "hybridMotor",
         "thumbnail": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/6.png",
         "accessories": [
           {
@@ -1104,11 +1104,11 @@
             "name": "2.0s"
           },
           {
-            "type": "turning_diameter",
+            "type": "turningDiameter",
             "name": "600 HP"
           },
           {
-            "type": "hybrid_motor",
+            "type": "hybridMotor",
             "name": "Híbrido"
           },
           {
@@ -1131,7 +1131,7 @@
       "id": 15
     },
     {
-      "user_id": 1,
+      "userId": 1,
       "car": {
         "id": "ffb71f55-818a-48b1-b7d2-2efc406ede25",
         "brand": "Porsche",
@@ -1141,7 +1141,7 @@
           "period": "Ao dia",
           "price": 340
         },
-        "fuel_type": "gasoline_motor",
+        "fuelType": "gasolineMotor",
         "thumbnail": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/2.png",
         "accessories": [
           {
@@ -1153,11 +1153,11 @@
             "name": "2.9s"
           },
           {
-            "type": "turning_diameter",
+            "type": "turningDiameter",
             "name": "700 HP"
           },
           {
-            "type": "gasoline_motor",
+            "type": "gasolineMotor",
             "name": "Gasoline"
           },
           {
@@ -1179,7 +1179,7 @@
       "id": 16
     },
     {
-      "user_id": 1,
+      "userId": 1,
       "car": {
         "id": "535e8de8-721b-4bac-8b72-7d29be7da467",
         "brand": "Audi",
@@ -1189,7 +1189,7 @@
           "period": "Ao dia",
           "price": 120
         },
-        "fuel_type": "electric_motor",
+        "fuelType": "electricMotor",
         "thumbnail": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/1.png",
         "accessories": [
           {
@@ -1201,11 +1201,11 @@
             "name": "3.8s"
           },
           {
-            "type": "turning_diameter",
+            "type": "turningDiameter",
             "name": "800 HP"
           },
           {
-            "type": "electric_motor",
+            "type": "electricMotor",
             "name": "Elétrico"
           },
           {
@@ -1228,7 +1228,7 @@
       "id": 17
     },
     {
-      "user_id": 1,
+      "userId": 1,
       "car": {
         "id": "ffb71f55-818a-48b1-b7d2-2efc406ede25",
         "brand": "Porsche",
@@ -1238,7 +1238,7 @@
           "period": "Ao dia",
           "price": 340
         },
-        "fuel_type": "gasoline_motor",
+        "fuelType": "gasolineMotor",
         "thumbnail": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/2.png",
         "accessories": [
           {
@@ -1250,11 +1250,11 @@
             "name": "2.9s"
           },
           {
-            "type": "turning_diameter",
+            "type": "turningDiameter",
             "name": "700 HP"
           },
           {
-            "type": "gasoline_motor",
+            "type": "gasolineMotor",
             "name": "Gasoline"
           },
           {
@@ -1281,7 +1281,7 @@
       "email": "Chrisalves@gmail.com",
       "password": "$2a$10$eNPpsVbzDWy7eeYGyzi1iu8xgG0LBcAxRdFU0QeCQszK3i6xpXIXe",
       "name": "Christopher Alves",
-      "driver_license": "123456789",
+      "driverLicense": "123456789",
       "id": 1
     }
   ]

@@ -22,7 +22,7 @@ interface Props extends RectButtonProps {
 }
 
 export const Car = ({ data, ...rest }: Props) => {
-  const MotorIcon = getAccessoryIcon(data.fuel_type)
+  const MotorIcon = getAccessoryIcon(data.fuelType)
   return (
     <Container {...rest}>
       <Details>

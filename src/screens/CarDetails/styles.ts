@@ -4,7 +4,7 @@ import styled from 'styled-components/native'
 
 export const Container = styled.View`
   flex: 1;
-  background-color: ${({ theme }) => theme.colors.background_secondary};
+  background-color: ${({ theme }) => theme.colors.backgroundSecondary};
 `;
 
 export const Header = styled.View`
@@ -35,7 +35,7 @@ export const Description = styled.View`
 `;
 export const Brand = styled.Text`
   font-family: ${({ theme }) => theme.fonts.secondary_500};
-  color: ${({ theme }) => theme.colors.text_detail};
+  color: ${({ theme }) => theme.colors.textDetail};
   font-size: ${RFValue(10)}px;
 
   text-transform: uppercase;
@@ -50,7 +50,7 @@ export const Rent = styled.View`
 `;
 export const Period  = styled.Text`
   font-family: ${({ theme }) => theme.fonts.secondary_500};
-  color: ${({ theme }) => theme.colors.text_detail};
+  color: ${({ theme }) => theme.colors.textDetail};
   font-size: ${RFValue(10)}px;
 
   text-transform: uppercase;
@@ -84,7 +84,7 @@ export const Accessories = styled.View`
 
 export const Footer = styled.View`
   width: 100%;
-  background-color: ${({ theme }) => theme.colors.background_secondary};
+  background-color: ${({ theme }) => theme.colors.backgroundSecondary};
 
   padding: 24px 24px ${getBottomSpace() + 24}px;
 `;

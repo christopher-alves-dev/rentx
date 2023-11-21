@@ -69,22 +69,22 @@ export const ScheduleDetails = () => {
   const handleConfirmRental = async () => {
     setLoading(true)
 
-    const schedulesByCar = await api.get(`/schedules_bycars/${car.id}`);
-    const unavailable_dates = [
-      ...schedulesByCar.data.unavailable_dates,
+    const schedulesByCar = await api.get(`/schedulesByCars/${car.id}`);
+    const unavailableDates = [
+      ...schedulesByCar.data.unavailableDates,
       ...dates,
     ];
 
-    await api.post('schedules_byuser', {
-      user_id: 1,
+    await api.post('schedulesByUser', {
+      userId: 1,
       car,
       startDate: format(getPlatformDate(new Date(dates[0])), 'dd/MM/yyyy'),
       endDate: format(getPlatformDate(new Date(dates[dates.length - 1])), 'dd/MM/yyyy'),
     })
 
-    api.put(`/schedules_bycars/${car.id}`, {
+    api.put(`/schedulesByCars/${car.id}`, {
       id: car.id,
-      unavailable_dates
+      unavailableDates
     })
       .then(() => {
         navigation.navigate('Confirmation', {

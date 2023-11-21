@@ -7,14 +7,14 @@ import { CarDTO } from '../../dtos/carDTO';
 export const Container = styled.View`
   flex: 1;
 
-  background-color: ${({ theme }) => theme.colors.background_primary};
+  background-color: ${({ theme }) => theme.colors.backgroundPrimary};
 `;
 
 export const Header = styled.View`
   width: 100%;
   height: 113px
 
-  background-color: ${({ theme }) => theme.colors.shape_dark};
+  background-color: ${({ theme }) => theme.colors.shapeDark};
   justify-content: flex-end;
   padding: 32px 24px;
 `;

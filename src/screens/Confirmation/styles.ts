@@ -24,7 +24,7 @@ export const Title = styled.Text`
 
 export const Message = styled.Text`
   font-size: ${RFValue(15)}px;
-  color: ${({ theme }) => theme.colors.text_detail};
+  color: ${({ theme }) => theme.colors.textDetail};
   font-family: ${({ theme }) => theme.fonts.primary_400};
   line-height: ${RFValue(25)}px;
   text-align: center;

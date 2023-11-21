@@ -86,7 +86,7 @@ export const SignIn = () => {
 
           <Button
             title='Criar conta gratuita'
-            color={theme.colors.background_secondary}
+            color={theme.colors.backgroundSecondary}
             onPress={handleNewAccount}
             enabled={true}
             loading={false}

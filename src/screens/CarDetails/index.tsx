@@ -83,7 +83,7 @@ export const CarDetails = () => {
       />
 
       <Animated.View
-        style={[headerStyleAnimation, styles.header, { backgroundColor: theme.colors.background_secondary }]}
+        style={[headerStyleAnimation, styles.header, { backgroundColor: theme.colors.backgroundSecondary }]}
       >
         <Animated.View
           style={sliderCarsStyleAnimation}

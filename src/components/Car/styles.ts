@@ -6,7 +6,7 @@ export const Container = styled(RectButton)`
   width: 100%;
   height: 126px;
 
-  background-color: ${({ theme }) => theme.colors.background_secondary};
+  background-color: ${({ theme }) => theme.colors.backgroundSecondary};
 
   flex-direction: row;
   justify-content: space-between;
@@ -21,7 +21,7 @@ export const Details = styled.View`
 `;
 export const Brand = styled.Text`
   font-family: ${({ theme }) => theme.fonts.secondary_500};
-  color: ${({ theme }) => theme.colors.text_detail};
+  color: ${({ theme }) => theme.colors.textDetail};
   font-size: ${RFValue(10)}px;
 
   text-transform: uppercase;
@@ -43,7 +43,7 @@ export const Rent = styled.View`
 `;
 export const Period = styled.Text`
   font-family: ${({ theme }) => theme.fonts.secondary_500};
-  color: ${({ theme }) => theme.colors.text_detail};
+  color: ${({ theme }) => theme.colors.textDetail};
   font-size: ${RFValue(10)}px;
 
   text-transform: uppercase;

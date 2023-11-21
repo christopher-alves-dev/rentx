@@ -5,7 +5,7 @@ import styled from 'styled-components/native'
 export const Container = styled(RectButton)`
   width: 80px;
   height: 56px;
-  background-color: ${({ theme }) => theme.colors.shape_dark};
+  background-color: ${({ theme }) => theme.colors.shapeDark};
 
   align-items: center;
   justify-content: center;
