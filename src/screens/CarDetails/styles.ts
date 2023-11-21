@@ -13,12 +13,12 @@ export const Header = styled.View`
   align-items: center;
 
   position: absolute;
-  margin-top: ${getStatusBarHeight() + 18}px;
+  margin-top: ${getStatusBarHeight() + 24}px;
   margin-left: 24px;
 `;
 
 export const CarImages = styled.View`
-  margin-top: ${getStatusBarHeight() + 32}px;
+  margin-top: ${getStatusBarHeight() + 36}px;
 `;
 
 export const Details = styled.View`
