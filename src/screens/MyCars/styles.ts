@@ -75,11 +75,11 @@ export const CarFooter = styled.View`
   align-items: center;
   justify-content: space-between;
 
-  background-color:  ${({ theme }) => theme.colors.background_secondary};
+  background-color:  ${({ theme }) => theme.colors.backgroundSecondary};
 `;
 
 export const CarFooterTitle = styled.Text`
-  color: ${({ theme }) => theme.colors.text_detail};
+  color: ${({ theme }) => theme.colors.textDetail};
   font-family: ${({ theme }) => theme.fonts.secondary_500};
   font-size: ${RFValue(10)}px;
 `;
@@ -89,7 +89,7 @@ export const CarFooterPeriod = styled.View`
 `;
 
 export const CarFooterDate = styled.Text`
-  color: ${({ theme }) => theme.colors.text_detail};
+  color: ${({ theme }) => theme.colors.textDetail};
   font-family: ${({ theme }) => theme.fonts.primary_400};
   font-size: ${RFValue(13)}px;
 `;

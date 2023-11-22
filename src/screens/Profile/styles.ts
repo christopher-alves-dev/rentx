@@ -8,7 +8,7 @@ interface OptionProps {
 }
 
 export const Container = styled.View`
-  background-color: ${({ theme }) => theme.colors.background_primary};
+  background-color: ${({ theme }) => theme.colors.backgroundPrimary};
 `;
 
 export const Header = styled.View`
@@ -33,7 +33,7 @@ export const HeaderTop = styled.View`
 export const HeaderTitle = styled.Text`
   font-size: ${RFValue(25)}px;
   font-family: ${({ theme }) => theme.fonts.secondary_600};
-  color: ${({ theme }) => theme.colors.background_secondary};
+  color: ${({ theme }) => theme.colors.backgroundSecondary};
 `;
 
 export const LogoutButton = styled(BorderlessButton)``;
@@ -96,7 +96,7 @@ export const OptionTitle = styled.Text<OptionProps> `
   font-family: ${({ theme, active }) =>
     active ? theme.fonts.secondary_600 : theme.fonts.secondary_500};
   color: ${({ theme, active }) =>
-    active ? theme.colors.header : theme.colors.text_detail};
+    active ? theme.colors.header : theme.colors.textDetail};
 `;
 
 
@@ -109,7 +109,7 @@ export const BottomSheetTitle = styled.Text`
 export const BottomSheetMessage = styled.Text`
   font-size: ${RFValue(16)}px;
   font-family: ${({ theme }) => theme.fonts.secondary_500};
-  color: ${({ theme }) => theme.colors.text_detail};
+  color: ${({ theme }) => theme.colors.textDetail};
 
   margin: ${RFValue(16)}px 0;
 `;

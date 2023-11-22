@@ -1,18 +1,18 @@
-import React, {useState} from 'react';
-import { TextInputProps } from 'react-native';
+import React, { useState } from 'react';
 import { Feather } from '@expo/vector-icons'
 import { useTheme } from 'styled-components/native';
 import { BorderlessButton } from 'react-native-gesture-handler';
 
 
 import { Container, IconContainer, InputText } from './styles';
+import { BottomSheetTextInputProps } from '@gorhom/bottom-sheet/lib/typescript/components/bottomSheetTextInput';
 
-interface Props extends TextInputProps {
+interface Props extends BottomSheetTextInputProps {
   iconName: React.ComponentProps<typeof Feather>['name']; // queremos tipar apenas os nomes dos icones
   value?: string;
 }
 
-export const PasswordInput = ({
+export const BottomSheetPasswordInput = ({
   iconName,
   value,
   ...rest
@@ -62,7 +62,7 @@ export const PasswordInput = ({
         <IconContainer
           isFocused={isFocused}
         >
-          <Feather 
+          <Feather
             name={isPasswordVisible ? 'eye' : 'eye-off'}
             size={24}
             color={theme.colors.textDetail}

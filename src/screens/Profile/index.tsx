@@ -1,16 +1,14 @@
+import { Feather } from '@expo/vector-icons';
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 import { useNavigation } from '@react-navigation/core';
-import React, { useRef, useState } from 'react';
+import { compare } from 'bcryptjs';
+import React, { useCallback, useMemo, useRef, useState } from 'react';
 import {
-  Alert,
   Keyboard,
   KeyboardAvoidingView,
-  Button as RNButton,
   TouchableWithoutFeedback,
   View
 } from 'react-native';
-import { Feather } from '@expo/vector-icons';
-import { compareSync } from 'bcryptjs';
 import Toast from 'react-native-root-toast';
 import { useTheme } from 'styled-components';
 import { useAuth } from '../../hooks/auth';
@@ -20,9 +18,10 @@ import { Button } from '../../components/Button';
 import { Input } from '../../components/Input';
 import { PasswordInput } from '../../components/PasswordInput';
 
-import { Modalize } from 'react-native-modalize';
+import BottomSheet, { BottomSheetBackdrop, BottomSheetBackdropProps } from '@gorhom/bottom-sheet';
 import { RFValue } from 'react-native-responsive-fontsize';
-import api from '../../services/api';
+import { BottomSheetPasswordInput } from '../../components/BottomSheetPasswordInput';
+import { LoadAnimation } from '../../components/LoadAnimation';
 import {
   BottomSheetMessage,
   BottomSheetTitle,
@@ -47,14 +46,16 @@ export function Profile() {
   const [option, setOption] = useState<'dataEdit' | 'passwordEdit'>('dataEdit');
   const [avatar, setAvatar] = useState(user?.avatar);
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
   const [name, setName] = useState(user?.name);
   const [driverLicense, setDriverLicense] = useState(user?.driverLicense);
-  const modalizeRef = useRef<Modalize>(null);
+  const bottomSheetRef = useRef<BottomSheet>(null);
+  const snapPoints = useMemo(() => ['40%'], []);
+  const bottomTabBarHeight = useBottomTabBarHeight()
 
   const onOpen = () => {
-    modalizeRef.current?.open();
+    bottomSheetRef.current?.expand();
   };
-  console.log({ user })
 
   const theme = useTheme();
   const navigation = useNavigation();
@@ -63,46 +64,76 @@ export function Profile() {
     navigation.goBack();
   }
 
-  const isPasswordCorrect = () => compareSync(password, "$2a$10$nXCkHcFjQKypL6/pBnTlJe76Gw3UentQLGyKwSa3ZNh1I0DKyedXi");
+  const isPasswordCorrect = async () => {
+    let isValid = false
+
+    isValid = await compare(password, "$2a$10$nXCkHcFjQKypL6/pBnTlJe76Gw3UentQLGyKwSa3ZNh1I0DKyedXi");
+
+    return isValid
+  }
 
   async function handleProfileUpdate() {
-    if (!isPasswordCorrect()) {
+    setLoading(true)
+    const isPasswordValid = await isPasswordCorrect()
+    if (!isPasswordValid) {
       Toast.show('Senha incorreta', {
         duration: Toast.durations.SHORT,
-        position: Toast.positions.CENTER,
-        backgroundColor: theme.colors.main
+        position: Toast.positions.TOP,
+        backgroundColor: theme.colors.main,
+        opacity: 1
       })
 
+      setLoading(false)
       return
     }
     try {
-      const data = { name, driverLicense, email: user?.email, id: user?.id, password };
+      // const data = { name, driverLicense, email: user?.email, id: user?.id, password };
 
-      api.put('/users/1', data)
+      // api.put('/users/1', data)
+
+      // Toast.show('Informações atualizadas com sucesso', {
+      //   duration: Toast.durations.SHORT,
+      //   position: Toast.positions.CENTER,
+      //   backgroundColor: theme.colors.success
+      // })
 
       Toast.show('Informações atualizadas com sucesso', {
         duration: Toast.durations.SHORT,
-        position: Toast.positions.CENTER,
-        backgroundColor: theme.colors.success
+        position: Toast.positions.TOP,
+        backgroundColor: theme.colors.success,
+        opacity: 1
       })
+      setLoading(false)
 
-      modalizeRef.current?.close();
+      bottomSheetRef.current?.close();
     } catch (error) {
-      Alert.alert('Erro');
-
       Toast.show('Erro ao tentar atualizar, tente novamente', {
         duration: Toast.durations.SHORT,
         position: Toast.positions.CENTER,
-        backgroundColor: theme.colors.success
+        backgroundColor: theme.colors.main,
+        opacity: 1
       })
     }
   }
+
+  const renderBackdrop = useCallback(
+    (props: BottomSheetBackdropProps) => (
+      <BottomSheetBackdrop
+        {...props}
+        disappearsOnIndex={-1}
+        appearsOnIndex={0}
+      />
+    ),
+    []
+  );
 
   return (
     <>
       <KeyboardAvoidingView behavior="position" enabled>
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <Container>
+
+
             <Header>
               <HeaderTop>
                 <BackButton
@@ -133,7 +164,7 @@ export function Profile() {
               </PhotoContainer>
             </Header>
 
-            <Content style={{ marginBottom: useBottomTabBarHeight() }}>
+            <Content style={{ marginBottom: bottomTabBarHeight }}>
               <Options>
                 <Option
                   active={option === 'dataEdit'}
@@ -205,41 +236,52 @@ export function Profile() {
 
 
           </Container>
+
         </TouchableWithoutFeedback>
       </KeyboardAvoidingView>
-      <Modalize
-        ref={modalizeRef}
-        adjustToContentHeight
+      <BottomSheet
+        ref={bottomSheetRef}
+        index={-1}
+        snapPoints={snapPoints}
+        keyboardBlurBehavior="restore"
+        enablePanDownToClose
+        backdropComponent={renderBackdrop}
       >
-        <View style={{
-          padding: RFValue(20),
-          alignItems: 'center'
-        }}>
-          <BottomSheetTitle>Confirmar alteração</BottomSheetTitle>
-          <BottomSheetMessage>Digite sua senha para confirmar as alterações.</BottomSheetMessage>
 
-          <PasswordInput
-            iconName="lock"
-            placeholder="Senha"
-            onChangeText={setPassword}
-            value={password}
-          />
-
-
+        {loading ? (
+          <LoadAnimation />
+        ) : (
           <View style={{
-            marginTop: RFValue(16),
-            width: '100%'
+            padding: RFValue(20),
+            alignItems: 'center'
           }}>
-            {/* Verificar pq não está funcionando os botões do gesture handler no modalize */}
-            <RNButton title='Confirmar' onPress={handleProfileUpdate} />
+            <BottomSheetTitle>Confirmar alteração</BottomSheetTitle>
+            <BottomSheetMessage>Digite sua senha para confirmar as alterações.</BottomSheetMessage>
 
-            {/* <Button
-              title="Confirmar"
-              onPress={() => console.log('cliquei')}
-            /> */}
+            <BottomSheetPasswordInput
+              iconName="lock"
+              placeholder="Senha"
+              onChangeText={setPassword}
+              value={password}
+            />
+
+            <View style={{
+              marginTop: RFValue(16),
+              width: '100%'
+            }}>
+              <Button
+                title="Confirmar"
+                onPress={async () => {
+                  Keyboard.dismiss()
+                  await handleProfileUpdate()
+                }}
+              />
+            </View>
           </View>
-        </View>
-      </Modalize>
+        )}
+
+
+      </BottomSheet >
     </>
   );
 }

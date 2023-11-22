@@ -22,12 +22,12 @@ export const AppTabRoutes = () => {
       screenOptions={{ 
         headerShown: false, 
         tabBarActiveTintColor: theme.colors.main,
-        tabBarInactiveTintColor: theme.colors.text_detail,
+        tabBarInactiveTintColor: theme.colors.textDetail,
         tabBarShowLabel: false,
         tabBarStyle: {
           paddingVertical: Platform.OS === 'ios' ? 20 : 0,
           height: 78,
-          backgroundColor: theme.colors.background_primary,
+          backgroundColor: theme.colors.backgroundPrimary,
         }
       }}
 

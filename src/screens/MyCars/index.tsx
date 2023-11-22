@@ -40,7 +40,7 @@ export const MyCars = () => {
   useFocusEffect(useCallback(() => {
     async function fetchCars() {
       try {
-        const response = await api.get<SchedulesByUser[]>('/schedules_byuser?user_id=1')
+        const response = await api.get<SchedulesByUser[]>('/schedulesByUser?userId=1')
         setCars(response.data.sort((a, b) => b.id - a.id))
 
       } catch (error) {

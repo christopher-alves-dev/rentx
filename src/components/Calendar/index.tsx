@@ -42,9 +42,9 @@ const Calendar = ({ markedDates, onDayPress }: CalendarProps) => {
         />
       }
       headerStyle={{
-        backgroundColor: theme.colors.background_secondary,
+        backgroundColor: theme.colors.backgroundSecondary,
         borderBottomWidth: 0.5,
-        borderBottomColor: theme.colors.text_detail,
+        borderBottomColor: theme.colors.textDetail,
         paddingBottom: 10,
         marginBottom: 10,
       }}

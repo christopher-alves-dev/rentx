@@ -14,13 +14,13 @@ export const getAccessoryIcon = (type: string ) => {
       return SpeedSvg;
     case 'acceleration':
       return AccelerationSvg;
-    case 'turning_diameter':
+    case 'turningDiameter':
       return ForceSvg;
-    case 'gasoline_motor':
+    case 'gasolineMotor':
       return GasolineSvg;
-    case 'electric_motor':
+    case 'electricMotor':
       return EnergySvg;
-    case 'hybrid_motor':
+    case 'hybridMotor':
       return HybridSvg;
     case 'exchange':
       return ExchangeSvg;

@@ -37,7 +37,7 @@ export const Input = ({
         <Feather
           name={iconName}
           size={24}
-          color={isFocused || isFilled ? theme.colors.main : theme.colors.text_detail}
+          color={isFocused || isFilled ? theme.colors.main : theme.colors.textDetail}
         />
       </IconContainer>
 

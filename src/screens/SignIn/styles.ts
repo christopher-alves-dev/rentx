@@ -6,7 +6,7 @@ export const Container = styled.ScrollView.attrs(({ theme }) => ({
   contentContainerStyle: {
     flexGrow: 1,
     paddingHorizontal: RFValue(24),
-    backgroundColor: theme.colors.background_primary,
+    backgroundColor: theme.colors.backgroundPrimary,
   }
 }))``;
 

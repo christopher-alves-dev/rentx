@@ -21,7 +21,7 @@ export const BackButton = ({
     <Container {...rest}>
       <MaterialIcons 
         name="chevron-left"
-        size={24}
+        size={28}
         color={color ? color : theme.colors.text}
       />
     </Container>
