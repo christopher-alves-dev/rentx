@@ -1,6 +1,6 @@
-import styled, { css } from 'styled-components/native';
-import { RFValue } from 'react-native-responsive-fontsize';
 import { BottomSheetTextInput } from '@gorhom/bottom-sheet';
+import { RFValue } from 'react-native-responsive-fontsize';
+import styled, { css } from 'styled-components/native';
 
 interface Props {
   isFocused: boolean;
@@ -23,12 +23,14 @@ export const IconContainer = styled.View<Props>`
   border-bottom-color: ${({ theme }) => theme.colors.backgroundSecondary};
 
   background-color: ${({ theme }) => theme.colors.backgroundSecondary};
-  ${({ theme, isFocused }) => isFocused && css`
-    border-bottom-color: ${theme.colors.main};
-  `};
+  ${({ theme, isFocused }) =>
+    isFocused &&
+    css`
+      border-bottom-color: ${theme.colors.main};
+    `};
 `;
 
-export const InputText = styled(BottomSheetTextInput) <Props>`
+export const InputText = styled(BottomSheetTextInput)<Props>`
   flex: 1;
 
   background-color: ${({ theme }) => theme.colors.backgroundSecondary};
@@ -40,8 +42,10 @@ export const InputText = styled(BottomSheetTextInput) <Props>`
 
   border-bottom-width: 2px;
   border-bottom-color: ${({ theme }) => theme.colors.backgroundSecondary};
-  
-  ${({ theme, isFocused }) => isFocused && css`
-    border-bottom-color: ${theme.colors.main};
-  `};
+
+  ${({ theme, isFocused }) =>
+    isFocused &&
+    css`
+      border-bottom-color: ${theme.colors.main};
+    `};
 `;

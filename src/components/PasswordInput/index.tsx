@@ -1,9 +1,8 @@
-import React, {useState} from 'react';
+import { Feather } from '@expo/vector-icons';
+import React, { useState } from 'react';
 import { TextInputProps } from 'react-native';
-import { Feather } from '@expo/vector-icons'
-import { useTheme } from 'styled-components/native';
 import { BorderlessButton } from 'react-native-gesture-handler';
-
+import { useTheme } from 'styled-components/native';
 
 import { Container, IconContainer, InputText } from './styles';
 
@@ -12,39 +11,35 @@ interface Props extends TextInputProps {
   value?: string;
 }
 
-export const PasswordInput = ({
-  iconName,
-  value,
-  ...rest
-}: Props) => {
+export const PasswordInput = ({ iconName, value, ...rest }: Props) => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(true);
   const [isFocused, setIsFocused] = useState(false);
   const [isFilled, setIsFilled] = useState(false);
 
-  const theme = useTheme()
+  const theme = useTheme();
 
   const handleInputFocus = () => {
-    setIsFocused(true)
-  }
+    setIsFocused(true);
+  };
 
   const handleInputBlur = () => {
-    setIsFocused(false)
-    setIsFilled(!!value)
-  }
+    setIsFocused(false);
+    setIsFilled(!!value);
+  };
 
   const handlePasswordVisibilityChange = () => {
     setIsPasswordVisible(prevState => !prevState);
-  }
+  };
 
   return (
-    <Container >
-      <IconContainer
-        isFocused={isFocused}
-      >
+    <Container>
+      <IconContainer isFocused={isFocused}>
         <Feather
           name={iconName}
           size={24}
-          color={isFocused || isFilled ? theme.colors.main : theme.colors.textDetail}
+          color={
+            isFocused || isFilled ? theme.colors.main : theme.colors.textDetail
+          }
         />
       </IconContainer>
 
@@ -56,20 +51,15 @@ export const PasswordInput = ({
         {...rest}
       />
 
-      <BorderlessButton
-        onPress={handlePasswordVisibilityChange}
-      >
-        <IconContainer
-          isFocused={isFocused}
-        >
-          <Feather 
+      <BorderlessButton onPress={handlePasswordVisibilityChange}>
+        <IconContainer isFocused={isFocused}>
+          <Feather
             name={isPasswordVisible ? 'eye' : 'eye-off'}
             size={24}
             color={theme.colors.textDetail}
           />
         </IconContainer>
       </BorderlessButton>
-
     </Container>
   );
 };

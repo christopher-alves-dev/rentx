@@ -46,7 +46,7 @@ export const Appointments = styled.View`
   justify-content: space-between;
   align-items: center;
 
-  padding: 24px 0; 
+  padding: 24px 0;
 `;
 
 export const AppointmentsTitle = styled.Text`
@@ -75,7 +75,7 @@ export const CarFooter = styled.View`
   align-items: center;
   justify-content: space-between;
 
-  background-color:  ${({ theme }) => theme.colors.backgroundSecondary};
+  background-color: ${({ theme }) => theme.colors.backgroundSecondary};
 `;
 
 export const CarFooterTitle = styled.Text`

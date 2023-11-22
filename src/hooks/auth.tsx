@@ -1,14 +1,9 @@
-import React, {
-  createContext,
-  useState,
-  useContext,
-  ReactNode
-} from 'react';
-
-import api from '../services/api';
+import React, { createContext, useState, useContext, ReactNode } from 'react';
 import { Alert } from 'react-native';
 import Toast from 'react-native-root-toast';
 import * as Yup from 'yup';
+
+import api from '../services/api';
 
 interface User {
   id: string;
@@ -35,7 +30,7 @@ interface AuthContextData {
 }
 
 interface AuthProveiderProps {
-  children: ReactNode
+  children: ReactNode;
 }
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
@@ -47,43 +42,41 @@ const AuthProvider = ({ children }: AuthProveiderProps) => {
     try {
       const response = await api.post('/login', {
         email,
-        password
-      })
-      
+        password,
+      });
+
       const { token, user } = response.data;
       api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-      setData({ token, user })
-      
+      setData({ token, user });
     } catch (error) {
-      
       if (error instanceof Yup.ValidationError) {
         Alert.alert('Opa', error.message);
       } else {
         Toast.show('Email ou Senha inválida.', {
           duration: Toast.durations.SHORT,
           position: Toast.positions.CENTER,
-          backgroundColor: 'red'
-        })
+          backgroundColor: 'red',
+        });
       }
     }
-  }
+  };
 
   const signOut = () => {
-    setData(undefined)
-  }
+    setData(undefined);
+  };
 
   return (
     <AuthContext.Provider
       value={{
         user: data?.user,
         signIn,
-        signOut
+        signOut,
       }}
     >
       {children}
     </AuthContext.Provider>
-  )
-}
+  );
+};
 
 function useAuth(): AuthContextData {
   const context = useContext(AuthContext);
@@ -91,4 +84,4 @@ function useAuth(): AuthContextData {
   return context;
 }
 
-export { AuthProvider, useAuth }
+export { AuthProvider, useAuth };

@@ -1,11 +1,10 @@
+import { Feather } from '@expo/vector-icons';
+import { BottomSheetTextInputProps } from '@gorhom/bottom-sheet/lib/typescript/components/bottomSheetTextInput';
 import React, { useState } from 'react';
-import { Feather } from '@expo/vector-icons'
-import { useTheme } from 'styled-components/native';
 import { BorderlessButton } from 'react-native-gesture-handler';
-
+import { useTheme } from 'styled-components/native';
 
 import { Container, IconContainer, InputText } from './styles';
-import { BottomSheetTextInputProps } from '@gorhom/bottom-sheet/lib/typescript/components/bottomSheetTextInput';
 
 interface Props extends BottomSheetTextInputProps {
   iconName: React.ComponentProps<typeof Feather>['name']; // queremos tipar apenas os nomes dos icones
@@ -21,30 +20,30 @@ export const BottomSheetPasswordInput = ({
   const [isFocused, setIsFocused] = useState(false);
   const [isFilled, setIsFilled] = useState(false);
 
-  const theme = useTheme()
+  const theme = useTheme();
 
   const handleInputFocus = () => {
-    setIsFocused(true)
-  }
+    setIsFocused(true);
+  };
 
   const handleInputBlur = () => {
-    setIsFocused(false)
-    setIsFilled(!!value)
-  }
+    setIsFocused(false);
+    setIsFilled(!!value);
+  };
 
   const handlePasswordVisibilityChange = () => {
     setIsPasswordVisible(prevState => !prevState);
-  }
+  };
 
   return (
-    <Container >
-      <IconContainer
-        isFocused={isFocused}
-      >
+    <Container>
+      <IconContainer isFocused={isFocused}>
         <Feather
           name={iconName}
           size={24}
-          color={isFocused || isFilled ? theme.colors.main : theme.colors.textDetail}
+          color={
+            isFocused || isFilled ? theme.colors.main : theme.colors.textDetail
+          }
         />
       </IconContainer>
 
@@ -56,12 +55,8 @@ export const BottomSheetPasswordInput = ({
         {...rest}
       />
 
-      <BorderlessButton
-        onPress={handlePasswordVisibilityChange}
-      >
-        <IconContainer
-          isFocused={isFocused}
-        >
+      <BorderlessButton onPress={handlePasswordVisibilityChange}>
+        <IconContainer isFocused={isFocused}>
           <Feather
             name={isPasswordVisible ? 'eye' : 'eye-off'}
             size={24}
@@ -69,7 +64,6 @@ export const BottomSheetPasswordInput = ({
           />
         </IconContainer>
       </BorderlessButton>
-
     </Container>
   );
 };

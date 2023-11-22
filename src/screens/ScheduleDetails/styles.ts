@@ -1,6 +1,9 @@
-import { getBottomSpace, getStatusBarHeight } from 'react-native-iphone-x-helper';
+import {
+  getBottomSpace,
+  getStatusBarHeight,
+} from 'react-native-iphone-x-helper';
 import { RFValue } from 'react-native-responsive-fontsize';
-import styled from 'styled-components/native'
+import styled from 'styled-components/native';
 
 export const Container = styled.View`
   flex: 1;
@@ -24,12 +27,10 @@ export const CarImages = styled.View`
 export const Content = styled.ScrollView.attrs({
   contentContainerStyle: {
     padding: 24,
-    alignItems: 'center'
+    alignItems: 'center',
   },
-  showsVerticalScrollIndicator: false
-})`
-
-`;
+  showsVerticalScrollIndicator: false,
+})``;
 export const Details = styled.View`
   width: 100%;
 
@@ -39,9 +40,7 @@ export const Details = styled.View`
 
   margin-top: 38px;
 `;
-export const Description = styled.View`
-
-`;
+export const Description = styled.View``;
 export const Brand = styled.Text`
   font-family: ${({ theme }) => theme.fonts.secondary_500};
   color: ${({ theme }) => theme.colors.textDetail};
@@ -54,10 +53,8 @@ export const Name = styled.Text`
   color: ${({ theme }) => theme.colors.title};
   font-size: ${RFValue(25)}px;
 `;
-export const Rent = styled.View`
-
-`;
-export const Period  = styled.Text`
+export const Rent = styled.View``;
+export const Period = styled.Text`
   font-family: ${({ theme }) => theme.fonts.secondary_500};
   color: ${({ theme }) => theme.colors.textDetail};
   font-size: ${RFValue(10)}px;
@@ -97,15 +94,14 @@ export const RentalPeriod = styled.View`
 
 export const CalendarIcon = styled.View`
   width: 48px;
-  height: 48px;background-color: ${({ theme }) => theme.colors.main};
+  height: 48px;
+  background-color: ${({ theme }) => theme.colors.main};
 
   justify-content: center;
   align-items: center;
 `;
 
-export const DateInfo = styled.View`
-
-`;
+export const DateInfo = styled.View``;
 
 export const DateTitle = styled.Text`
   font-family: ${({ theme }) => theme.fonts.primary_500};

@@ -8,10 +8,16 @@ export interface CarDTO {
   rent: {
     period: string;
     price: number;
-  }
+  };
   accessories: {
-    type: 'speed' | 'acceleration' | 'turningDiameter' | 'electricMotor' | 'exchange' | 'seats'
-    name: 'string'
-  }[],  
-  photos: string[]
+    type:
+      | 'speed'
+      | 'acceleration'
+      | 'turningDiameter'
+      | 'electricMotor'
+      | 'exchange'
+      | 'seats';
+    name: 'string';
+  }[];
+  photos: string[];
 }

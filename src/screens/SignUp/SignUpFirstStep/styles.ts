@@ -7,9 +7,8 @@ export const Container = styled.ScrollView.attrs(({ theme }) => ({
     flexGrow: 1,
     paddingHorizontal: RFValue(24),
     backgroundColor: theme.colors.backgroundPrimary,
-  }
-}))`
-`;
+  },
+}))``;
 
 export const Header = styled.View`
   width: 100%;
@@ -23,23 +22,23 @@ export const Header = styled.View`
 export const Steps = styled.View`
   flex-direction: row;
   align-items: center;
-`
+`;
 
 export const Title = styled.Text`
   font-size: ${RFValue(40)}px;
-  font-family: ${({theme}) => theme.fonts.secondary_600};
-  color: ${({theme}) => theme.colors.title};
+  font-family: ${({ theme }) => theme.fonts.secondary_600};
+  color: ${({ theme }) => theme.colors.title};
 
   margin-top: 60px;
   margin-bottom: 16px;
-`
+`;
 
 export const Subtitle = styled.Text`
   font-size: ${RFValue(15)}px;
-  font-family: ${({theme}) => theme.fonts.primary_400};
-  color: ${({theme}) => theme.colors.text};
+  font-family: ${({ theme }) => theme.fonts.primary_400};
+  color: ${({ theme }) => theme.colors.text};
   line-height: ${RFValue(25)}px;
-`
+`;
 
 export const Form = styled.View`
   width: 100%;
@@ -49,8 +48,8 @@ export const Form = styled.View`
 
 export const FormTitle = styled.Text`
   font-size: ${RFValue(20)}px;
-  font-family: ${({theme}) => theme.fonts.secondary_600};
-  color: ${({theme}) => theme.colors.title};
+  font-family: ${({ theme }) => theme.fonts.secondary_600};
+  color: ${({ theme }) => theme.colors.title};
 
   margin-bottom: 24px;
 `;

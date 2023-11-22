@@ -1,15 +1,14 @@
+import { useNavigation, useRoute } from '@react-navigation/native';
 import React from 'react';
-import { useNavigation, useRoute } from '@react-navigation/native'
 import { StatusBar, StyleSheet } from 'react-native';
-
-import Animated, { Extrapolate, interpolate, useAnimatedScrollHandler, useAnimatedStyle, useSharedValue } from 'react-native-reanimated';
-
-import { Accessory } from '../../components/Accessory';
-import { BackButton } from '../../components/BackButton';
-import { ImageSlider } from '../../components/ImageSlider';
-import { Button } from '../../components/Button';
-
-import { getAccessoryIcon } from '../../utils/getAccessoryIcon';
+import { getStatusBarHeight } from 'react-native-iphone-x-helper';
+import Animated, {
+  Extrapolate,
+  interpolate,
+  useAnimatedScrollHandler,
+  useAnimatedStyle,
+  useSharedValue,
+} from 'react-native-reanimated';
 
 import {
   Container,
@@ -24,12 +23,15 @@ import {
   About,
   Accessories,
   Footer,
-  CarImages
-} from './styles'
-
+  CarImages,
+} from './styles';
+import { Accessory } from '../../components/Accessory';
+import { BackButton } from '../../components/BackButton';
+import { Button } from '../../components/Button';
+import { ImageSlider } from '../../components/ImageSlider';
 import { CarDTO } from '../../dtos/carDTO';
-import { getStatusBarHeight } from 'react-native-iphone-x-helper';
 import theme from '../../styles/theme';
+import { getAccessoryIcon } from '../../utils/getAccessoryIcon';
 interface Params {
   car: CarDTO;
 }
@@ -41,8 +43,8 @@ export const CarDetails = () => {
 
   const scrollY = useSharedValue(0);
   const scrollhandler = useAnimatedScrollHandler(event => {
-    scrollY.value = event.contentOffset.y
-  })
+    scrollY.value = event.contentOffset.y;
+  });
 
   const headerStyleAnimation = useAnimatedStyle(() => {
     return {
@@ -50,54 +52,48 @@ export const CarDetails = () => {
         scrollY.value,
         [0, 200],
         [200, 80],
-        Extrapolate.CLAMP
-      )
-    }
-  })
+        Extrapolate.CLAMP,
+      ),
+    };
+  });
 
   const sliderCarsStyleAnimation = useAnimatedStyle(() => {
     return {
-      opacity: interpolate(
-        scrollY.value,
-        [0, 150],
-        [1, 0],
-        Extrapolate.CLAMP
-      )
-    }
-  })
+      opacity: interpolate(scrollY.value, [0, 150], [1, 0], Extrapolate.CLAMP),
+    };
+  });
 
   const handleGoBackPage = () => {
-    navigation.goBack()
-  }
+    navigation.goBack();
+  };
 
   const handleConfirmRental = () => {
     navigation.navigate('Schedule', { car });
-  }
+  };
 
   return (
     <Container>
       <StatusBar
-        barStyle='dark-content'
+        barStyle="dark-content"
         translucent
-        backgroundColor='transparent'
+        backgroundColor="transparent"
       />
 
       <Animated.View
-        style={[headerStyleAnimation, styles.header, { backgroundColor: theme.colors.backgroundSecondary }]}
+        style={[
+          headerStyleAnimation,
+          styles.header,
+          { backgroundColor: theme.colors.backgroundSecondary },
+        ]}
       >
-        <Animated.View
-          style={sliderCarsStyleAnimation}
-        >
+        <Animated.View style={sliderCarsStyleAnimation}>
           <CarImages>
             <ImageSlider imagesUrl={car.photos} />
           </CarImages>
-
         </Animated.View>
 
         <Header>
-          <BackButton
-            onPress={handleGoBackPage}
-          />
+          <BackButton onPress={handleGoBackPage} />
         </Header>
       </Animated.View>
 
@@ -129,9 +125,7 @@ export const CarDetails = () => {
               name={accessory.name}
               icon={getAccessoryIcon(accessory.type)}
             />
-
           ))}
-
         </Accessories>
 
         <About>
@@ -145,16 +139,19 @@ export const CarDetails = () => {
       </Animated.ScrollView>
 
       <Footer>
-        <Button title='Escolher período do aluguel' onPress={handleConfirmRental} />
+        <Button
+          title="Escolher período do aluguel"
+          onPress={handleConfirmRental}
+        />
       </Footer>
     </Container>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   header: {
     position: 'absolute',
     overflow: 'hidden',
     zIndex: 1,
-  }
-})
+  },
+});

@@ -1,23 +1,21 @@
-import React from 'react';
-import AppLoading from 'expo-app-loading';
-import { ThemeProvider } from 'styled-components'
 import {
   Archivo_400Regular,
   Archivo_500Medium,
   Archivo_600SemiBold,
-} from '@expo-google-fonts/archivo'
-
-import {  
+} from '@expo-google-fonts/archivo';
+import {
   useFonts,
   Inter_400Regular,
   Inter_500Medium,
-} from '@expo-google-fonts/inter'
-
-import theme from './src/styles/theme'
-
-import { Routes } from './src/routes';
-import { AppProvider } from './src/hooks';
+} from '@expo-google-fonts/inter';
+import AppLoading from 'expo-app-loading';
+import React from 'react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { ThemeProvider } from 'styled-components';
+
+import { AppProvider } from './src/hooks';
+import { Routes } from './src/routes';
+import theme from './src/styles/theme';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -25,20 +23,20 @@ export default function App() {
     Archivo_500Medium,
     Archivo_600SemiBold,
     Inter_400Regular,
-    Inter_500Medium
-  })
+    Inter_500Medium,
+  });
 
   if (!fontsLoaded) {
-    return <AppLoading />
+    return <AppLoading />;
   }
 
-  return ( 
-    <GestureHandlerRootView style={{flex: 1}}>
+  return (
+    <GestureHandlerRootView style={{ flex: 1 }}>
       <ThemeProvider theme={theme}>
         <AppProvider>
           <Routes />
         </AppProvider>
       </ThemeProvider>
     </GestureHandlerRootView>
-  )
+  );
 }

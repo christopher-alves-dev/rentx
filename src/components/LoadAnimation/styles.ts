@@ -16,6 +16,6 @@ export const LoadText = styled.Text`
   position: absolute;
   bottom: ${RFValue(20)}px;
   color: ${({ theme }) => theme.colors.main};
-  font-family: ${({theme}) => theme.fonts.primary_400};
+  font-family: ${({ theme }) => theme.fonts.primary_400};
   font-size: ${RFValue(15)}px;
 `;

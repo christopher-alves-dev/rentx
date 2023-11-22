@@ -6,5 +6,5 @@ export enum SaleStatusEnum {
   VISITA_TECNICA_FINALIZADA = 'Visita Técnica finalizada',
 
   PRE_ORCAMENTO = 'Pré-orçamento',
-  ORCAMENTO_FINALIZADO = 'Orçamento finalizado'
+  ORCAMENTO_FINALIZADO = 'Orçamento finalizado',
 }

@@ -7,7 +7,5 @@ interface Props {
 }
 
 export const Bullet = ({ active = false }: Props) => {
-  return (
-    <Container active={active} />
-  );
+  return <Container active={active} />;
 };

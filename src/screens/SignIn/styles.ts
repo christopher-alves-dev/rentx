@@ -7,7 +7,7 @@ export const Container = styled.ScrollView.attrs(({ theme }) => ({
     flexGrow: 1,
     paddingHorizontal: RFValue(24),
     backgroundColor: theme.colors.backgroundPrimary,
-  }
+  },
 }))``;
 
 export const Header = styled.View`
@@ -17,14 +17,14 @@ export const Header = styled.View`
 
 export const Title = styled.Text`
   font-size: ${RFValue(40)}px;
-  font-family: ${({theme}) => theme.fonts.secondary_600};
-  color: ${({theme}) => theme.colors.title};
+  font-family: ${({ theme }) => theme.fonts.secondary_600};
+  color: ${({ theme }) => theme.colors.title};
 `;
 
 export const Subtitle = styled.Text`
   font-size: ${RFValue(15)}px;
-  font-family: ${({theme}) => theme.fonts.primary_400};
-  color: ${({theme}) => theme.colors.text};
+  font-family: ${({ theme }) => theme.fonts.primary_400};
+  color: ${({ theme }) => theme.colors.text};
   line-height: ${RFValue(25)}px;
   margin-top: 16px;
 `;
@@ -34,6 +34,4 @@ export const Form = styled.View`
   margin: 64px 0;
 `;
 
-export const Footer = styled.View`
-
-`;
+export const Footer = styled.View``;
