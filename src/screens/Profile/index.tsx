@@ -22,23 +22,7 @@ import BottomSheet, { BottomSheetBackdrop, BottomSheetBackdropProps } from '@gor
 import { RFValue } from 'react-native-responsive-fontsize';
 import { BottomSheetPasswordInput } from '../../components/BottomSheetPasswordInput';
 import { LoadAnimation } from '../../components/LoadAnimation';
-import {
-  BottomSheetMessage,
-  BottomSheetTitle,
-  Container,
-  Content,
-  Header,
-  HeaderTitle,
-  HeaderTop,
-  LogoutButton,
-  Option,
-  OptionTitle,
-  Options,
-  Photo,
-  PhotoButton,
-  PhotoContainer,
-  Section
-} from './styles';
+import * as S from './styles'
 
 export function Profile() {
   const { user, signOut } = useAuth();
@@ -131,66 +115,63 @@ export function Profile() {
     <>
       <KeyboardAvoidingView behavior="position" enabled>
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-          <Container>
-
-
-            <Header>
-              <HeaderTop>
+          <S.Container>
+            <S.Header>
+              <S.HeaderTop>
                 <BackButton
                   color={theme.colors.shape}
                   onPress={handleBack}
                 />
-                <HeaderTitle>Editar Perfil</HeaderTitle>
-                <LogoutButton onPress={signOut}>
+                <S.HeaderTitle>Editar Perfil</S.HeaderTitle>
+                <S.LogoutButton onPress={signOut}>
                   <Feather
                     name="power" size={24}
                     color={theme.colors.shape}
                   />
-                </LogoutButton>
-              </HeaderTop>
+                </S.LogoutButton>
+              </S.HeaderTop>
 
-              <PhotoContainer>
-                {!!avatar && <Photo source={{ uri: avatar }} />}
-                <PhotoButton onPress={
+              <S.PhotoContainer>
+                {!!avatar && <S.Photo source={{ uri: avatar }} />}
+                <S.PhotoButton onPress={
                   () => console.log('handleAvatarSelect')
-                  // handleAvatarSelect
                 }>
                   <Feather
                     name="camera"
                     size={24}
                     color={theme.colors.shape}
                   />
-                </PhotoButton>
-              </PhotoContainer>
-            </Header>
+                </S.PhotoButton>
+              </S.PhotoContainer>
+            </S.Header>
 
-            <Content style={{ marginBottom: bottomTabBarHeight }}>
-              <Options>
-                <Option
+            <S.Content style={{ marginBottom: bottomTabBarHeight }}>
+              <S.Options>
+                <S.Option
                   active={option === 'dataEdit'}
                   onPress={() => console.log('handleOptionChange')
                     //handleOptionChange('dataEdit')
                   }
                 >
-                  <OptionTitle active={option === 'dataEdit'}>
+                  <S.OptionTitle active={option === 'dataEdit'}>
                     Dados
-                  </OptionTitle>
-                </Option>
-                <Option
+                  </S.OptionTitle>
+                </S.Option>
+                <S.Option
                   active={option === 'passwordEdit'}
                   onPress={() => console.log('handleOptionChange')
                     // handleOptionChange('passwordEdit')
                   }
                 >
-                  <OptionTitle active={option === 'passwordEdit'}>
+                  <S.OptionTitle active={option === 'passwordEdit'}>
                     Trocar senha
-                  </OptionTitle>
-                </Option>
-              </Options>
+                  </S.OptionTitle>
+                </S.Option>
+              </S.Options>
               {
                 option === 'dataEdit'
                   ?
-                  <Section>
+                  <S.Section>
                     <Input
                       iconName="user"
                       placeholder="Nome"
@@ -210,9 +191,9 @@ export function Profile() {
                       defaultValue={user?.driverLicense}
                       onChangeText={setDriverLicense}
                     />
-                  </Section>
+                  </S.Section>
                   :
-                  <Section>
+                  <S.Section>
                     <PasswordInput
                       iconName="lock"
                       placeholder="Senha atual"
@@ -225,18 +206,14 @@ export function Profile() {
                       iconName="lock"
                       placeholder="Repetir senha"
                     />
-                  </Section>
+                  </S.Section>
               }
-
               <Button
                 title="Salvar alterações"
                 onPress={onOpen}
               />
-            </Content>
-
-
-          </Container>
-
+            </S.Content>
+          </S.Container>
         </TouchableWithoutFeedback>
       </KeyboardAvoidingView>
       <BottomSheet
@@ -247,7 +224,6 @@ export function Profile() {
         enablePanDownToClose
         backdropComponent={renderBackdrop}
       >
-
         {loading ? (
           <LoadAnimation />
         ) : (
@@ -255,16 +231,14 @@ export function Profile() {
             padding: RFValue(20),
             alignItems: 'center'
           }}>
-            <BottomSheetTitle>Confirmar alteração</BottomSheetTitle>
-            <BottomSheetMessage>Digite sua senha para confirmar as alterações.</BottomSheetMessage>
-
+            <S.BottomSheetTitle>Confirmar alteração</S.BottomSheetTitle>
+            <S.BottomSheetMessage>Digite sua senha para confirmar as alterações.</S.BottomSheetMessage>
             <BottomSheetPasswordInput
               iconName="lock"
               placeholder="Senha"
               onChangeText={setPassword}
               value={password}
             />
-
             <View style={{
               marginTop: RFValue(16),
               width: '100%'
@@ -279,8 +253,6 @@ export function Profile() {
             </View>
           </View>
         )}
-
-
       </BottomSheet >
     </>
   );

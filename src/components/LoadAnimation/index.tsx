@@ -1,21 +1,30 @@
-import React from 'react';
 import LottieView from 'lottie-react-native';
+import React from 'react';
 
 import LoadingCar from '../../assets/images/load_animated.json';
 
-import { Container } from './styles';
+import { View } from 'react-native';
+import * as S from './styles';
 
-export const LoadAnimation = () => {
+type Props = {
+  text?: string
+}
+
+export const LoadAnimation = ({ text = 'Carregando...'}: Props) => {
   return (
-    <Container>
+    <S.Container>
+      <View style={{
+        position: 'relative',
+        alignItems: 'center'
+      }}>
       <LottieView
         source={LoadingCar}
         style={{ height: 200 }}
         resizeMode='contain'
         autoPlay
-      >
-        
-      </LottieView>
-    </Container>
+      />
+        <S.LoadText>{text}</S.LoadText>
+      </View>
+    </S.Container>
   );
 };
