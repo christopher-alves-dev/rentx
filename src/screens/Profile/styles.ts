@@ -1,11 +1,8 @@
 import { BorderlessButton, RectButton } from 'react-native-gesture-handler';
 import { getStatusBarHeight } from 'react-native-iphone-x-helper';
+import Animated from 'react-native-reanimated';
 import { RFValue } from 'react-native-responsive-fontsize';
-import styled, { css } from 'styled-components/native';
-
-interface OptionProps {
-  active: boolean;
-}
+import styled from 'styled-components/native';
 
 export const Container = styled.View`
   background-color: ${({ theme }) => theme.colors.backgroundPrimary};
@@ -72,33 +69,25 @@ export const Content = styled.View`
   margin-top: 122px;
 `;
 
-export const Options = styled.View`
-  border-bottom-width: 1px;
-  border-bottom-color: ${({ theme }) => theme.colors.line};
-
+export const TabsWrapper = styled.View`
   flex-direction: row;
   justify-content: space-around;
+`;
+
+export const Tabs = styled.View`
+  border-bottom-width: 1px;
+  border-bottom-color: ${({ theme }) => theme.colors.line};
 
   margin-bottom: 32px;
 `;
 
-export const Option = styled.TouchableOpacity<OptionProps>`
+export const Tab = styled.TouchableOpacity`
   padding-bottom: 14px;
-
-  ${({ active }) =>
-    active &&
-    css`
-      border-bottom-width: 3px;
-      border-bottom-color: ${({ theme }) => theme.colors.main};
-    `}
 `;
 
-export const OptionTitle = styled.Text<OptionProps>`
+export const TabTitle = styled(Animated.Text)`
   font-size: ${RFValue(20)}px;
-  font-family: ${({ theme, active }) =>
-    active ? theme.fonts.secondary_600 : theme.fonts.secondary_500};
-  color: ${({ theme, active }) =>
-    active ? theme.colors.header : theme.colors.textDetail};
+  font-family: ${({ theme }) => theme.fonts.secondary_600};
 `;
 
 export const BottomSheetTitle = styled.Text`
