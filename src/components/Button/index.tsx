@@ -5,30 +5,25 @@ import { useTheme } from 'styled-components';
 
 import { Container, Title } from './styles';
 
-interface Props extends RectButtonProps {
+interface Props extends Omit<RectButtonProps, 'onPress'> {
   title: string;
-  color?: string | undefined;
   loading?: boolean;
   light?: boolean;
+  onPress: () => void;
 }
 
 export const Button = ({
   title,
-  color,
   onPress,
   enabled = true,
   loading = false,
   light = false,
+  ...rest
 }: Props) => {
   const theme = useTheme();
 
   return (
-    <Container
-      color={color ? color : theme.colors.main}
-      onPress={onPress}
-      enabled={enabled}
-      style={{ opacity: enabled === false || loading === true ? 0.5 : 1 }}
-    >
+    <Container {...rest} onPress={onPress} enabled={enabled}>
       {loading ? (
         <ActivityIndicator color={theme.colors.shape} />
       ) : (

@@ -3,7 +3,7 @@ import { RFValue } from 'react-native-responsive-fontsize';
 import styled from 'styled-components/native';
 
 interface ButtonProps {
-  color: string;
+  loading?: boolean;
 }
 
 interface ButtonTextProps {
@@ -16,8 +16,8 @@ export const Container = styled(RectButton)<ButtonProps>`
   padding: 19px;
   align-items: center;
   justify-content: center;
-
-  background-color: ${({ color }) => color};
+  opacity: ${({ enabled, loading }) => (!enabled || loading ? 0.5 : 1)};
+  background-color: ${({ theme }) => theme.colors.main};
 
   margin-bottom: 8px;
 `;
