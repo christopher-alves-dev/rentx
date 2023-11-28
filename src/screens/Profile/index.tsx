@@ -7,7 +7,7 @@ import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 import { useNavigation } from '@react-navigation/core';
 import { compare } from 'bcryptjs';
 import React, { useCallback, useMemo, useRef, useState } from 'react';
-import { FormProvider } from 'react-hook-form';
+import { SubmitHandler } from 'react-hook-form';
 import {
   Keyboard,
   KeyboardAvoidingView,
@@ -27,7 +27,7 @@ import { RFValue } from 'react-native-responsive-fontsize';
 import Toast from 'react-native-root-toast';
 import { useTheme } from 'styled-components';
 
-import { useFormProfile } from './hooks/useForm';
+import { ProfileFormFields, useFormProfile } from './hooks/useForm';
 import * as S from './styles';
 import { BackButton } from '../../components/BackButton';
 import { BottomSheetPasswordInput } from '../../components/BottomSheetPasswordInput';
@@ -40,6 +40,7 @@ import { useAuth } from '../../hooks/auth';
 export function Profile() {
   const { user, signOut } = useAuth();
   const { formMethods } = useFormProfile();
+
   const formsScrollableContainer = useRef<ScrollView>(null);
   const [formSize, setFormSize] = useState(0);
 
@@ -52,6 +53,10 @@ export function Profile() {
   const tabBottomLineAnimation = useSharedValue(0);
   const tabBottomLineWidthAnimation = useSharedValue(100);
   const tabTitleAnimation = useSharedValue(0);
+
+  const submit: SubmitHandler<ProfileFormFields> = (formValues, e) => {
+    console.log({ aqui: formValues });
+  };
 
   const onOpen = () => {
     bottomSheetRef.current?.expand();
@@ -131,6 +136,7 @@ export function Profile() {
   );
 
   const goToNextStep = () => {
+    formMethods.setValue('formType', 'password');
     tabBottomLineAnimation.value = withTiming(200);
     tabBottomLineWidthAnimation.value = withTiming(175);
     tabTitleAnimation.value = withTiming(1);
@@ -138,6 +144,7 @@ export function Profile() {
   };
 
   const goToPreviousStep = () => {
+    formMethods.setValue('formType', 'data');
     tabBottomLineAnimation.value = withTiming(0);
     tabBottomLineWidthAnimation.value = withTiming(100);
     tabTitleAnimation.value = withTiming(0);
@@ -147,7 +154,7 @@ export function Profile() {
   const tabBottomLineToNextStyle = useAnimatedStyle(() => {
     return {
       width: tabBottomLineWidthAnimation.value,
-      backgroundColor: 'red',
+      backgroundColor: theme.colors.main,
       transform: [
         {
           translateX: interpolate(
@@ -182,7 +189,7 @@ export function Profile() {
   });
 
   return (
-    <FormProvider {...formMethods}>
+    <>
       <KeyboardAvoidingView behavior="position" enabled>
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <S.Container>
@@ -228,7 +235,6 @@ export function Profile() {
               </S.Tabs>
               {/* Adicionar tipo do form no react hook form, se for dados, eles são obrigatórios e de senha não,
               se for de troca de senha, eles são obrigatórios e os de dados não. */}
-              {/* Fazer a transição entre os forms através de um useRef e scrollando. */}
               <ScrollView
                 horizontal
                 style={{
@@ -246,10 +252,21 @@ export function Profile() {
                     alignItems: 'center',
                   }}
                 >
-                  <InputForm name="name" iconName="user" />
-                  <InputForm name="email" iconName="mail" />
-                  <InputForm name="driverLicense" iconName="credit-card" />
-                  <Button title="Salvar alterações" onPress={onOpen} />
+                  <InputForm
+                    control={formMethods.control}
+                    name="name"
+                    iconName="user"
+                  />
+                  <InputForm
+                    control={formMethods.control}
+                    name="email"
+                    iconName="mail"
+                  />
+                  <InputForm
+                    control={formMethods.control}
+                    name="driverLicense"
+                    iconName="credit-card"
+                  />
                 </S.Section>
 
                 <S.Section
@@ -264,6 +281,13 @@ export function Profile() {
                   <PasswordInput iconName="lock" placeholder="Repetir senha" />
                 </S.Section>
               </ScrollView>
+
+              <Button
+                title="SALVAR"
+                onPress={formMethods.handleSubmit(submit, invalid =>
+                  console.log({ invalid }),
+                )}
+              />
             </S.Content>
           </S.Container>
         </TouchableWithoutFeedback>
@@ -312,6 +336,6 @@ export function Profile() {
           </View>
         )}
       </BottomSheet>
-    </FormProvider>
+    </>
   );
 }
