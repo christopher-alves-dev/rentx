@@ -1,7 +1,28 @@
 import * as yup from 'yup';
 
 export const profileSchema = yup.object({
-  name: yup.string().required(),
-  email: yup.string().required(),
-  driverLicense: yup.number().required(),
+  formType: yup.string().required(),
+  name: yup.string().when('formType', {
+    is: (formType: string) => formType === 'data',
+    then: yup
+      .string()
+      .required('Campo obrigatório')
+      .test('val', val => !!val),
+  }),
+  email: yup.string().when('formType', {
+    is: (formType: string) => formType === 'data',
+    then: yup
+      .string()
+      .required('Campo obrigatório')
+      .test('val', val => !!val),
+  }),
+  driverLicense: yup.string().when('formType', {
+    is: (formType: string) => formType === 'data',
+    then: yup
+      .string()
+      .required('Campo obrigatório')
+      .test('val', val => !!val),
+  }),
 });
+
+export type ProfileFormType = yup.InferType<typeof profileSchema>;
