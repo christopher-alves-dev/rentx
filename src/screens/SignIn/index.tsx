@@ -80,11 +80,13 @@ export const SignIn = () => {
 
           <Button
             title="Criar conta gratuita"
-            color={theme.colors.backgroundSecondary}
             onPress={handleNewAccount}
             enabled
             loading={false}
             light
+            style={{
+              backgroundColor: theme.colors.backgroundSecondary,
+            }}
           />
         </Footer>
       </Container>

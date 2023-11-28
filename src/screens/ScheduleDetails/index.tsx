@@ -183,10 +183,12 @@ export const ScheduleDetails = () => {
       <Footer>
         <Button
           title="Alugar agora"
-          color={theme.colors.success}
           onPress={handleConfirmRental}
           enabled={!loading}
           loading={loading}
+          style={{
+            backgroundColor: theme.colors.success,
+          }}
         />
       </Footer>
     </Container>

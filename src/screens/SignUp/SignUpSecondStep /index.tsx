@@ -111,8 +111,10 @@ export const SignUpSecondStep = () => {
 
           <Button
             title="Cadastrar"
-            color={theme.colors.success}
             onPress={handleRegister}
+            style={{
+              backgroundColor: theme.colors.success,
+            }}
           />
         </Container>
       </TouchableNativeFeedback>
