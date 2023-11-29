@@ -33,6 +33,7 @@ import { BackButton } from '../../components/BackButton';
 import { BottomSheetPasswordInput } from '../../components/BottomSheetPasswordInput';
 import { Button } from '../../components/Button';
 import { InputForm } from '../../components/InputForm';
+import { InputPasswordForm } from '../../components/InputPasswordForm';
 import { LoadAnimation } from '../../components/LoadAnimation';
 import { PasswordInput } from '../../components/PasswordInput';
 import { useAuth } from '../../hooks/auth';
@@ -212,7 +213,7 @@ export function Profile() {
               </S.PhotoContainer>
             </S.Header>
 
-            <S.Content style={{ marginBottom: bottomTabBarHeight }}>
+            <S.Content>
               <S.Tabs>
                 <S.TabsWrapper>
                   <S.Tab onPress={goToPreviousStep}>
@@ -276,9 +277,24 @@ export function Profile() {
                     alignItems: 'center',
                   }}
                 >
-                  <PasswordInput iconName="lock" placeholder="Senha atual" />
-                  <PasswordInput iconName="lock" placeholder="Nova senha" />
-                  <PasswordInput iconName="lock" placeholder="Repetir senha" />
+                  <InputPasswordForm
+                    control={formMethods.control}
+                    name="currentPassword"
+                    iconName="lock"
+                    placeholder="Senha atual"
+                  />
+                  <InputPasswordForm
+                    control={formMethods.control}
+                    name="newPassword"
+                    iconName="lock"
+                    placeholder="Nova senha"
+                  />
+                  <InputPasswordForm
+                    control={formMethods.control}
+                    name="newPasswordConfirmation"
+                    iconName="lock"
+                    placeholder="Repetir senha"
+                  />
                 </S.Section>
               </ScrollView>
 
