@@ -262,11 +262,13 @@ export function Profile() {
                     control={formMethods.control}
                     name="email"
                     iconName="mail"
+                    keyboardType="email-address"
                   />
                   <InputForm
                     control={formMethods.control}
                     name="driverLicense"
                     iconName="credit-card"
+                    keyboardType="numeric"
                   />
                 </S.Section>
 
