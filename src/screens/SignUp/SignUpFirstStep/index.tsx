@@ -86,6 +86,7 @@ export const SignUpFirstStep = () => {
               iconName="mail"
               placeholder="E-mail"
               keyboardType="email-address"
+              autoCapitalize="none"
               onChangeText={setEmail}
               value={email}
             />
