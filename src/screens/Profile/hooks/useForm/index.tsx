@@ -4,13 +4,6 @@ import { useForm } from 'react-hook-form';
 import { useAuth } from '../../../../hooks/auth';
 import { ProfileFormType, profileSchema } from '../../schema-validation';
 
-export type ProfileFormFields = {
-  formType: string;
-  name?: string;
-  email?: string;
-  driverLicense?: string;
-};
-
 export const useFormProfile = () => {
   const { user } = useAuth();
   const formMethods = useForm<ProfileFormType>({

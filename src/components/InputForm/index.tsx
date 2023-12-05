@@ -5,10 +5,10 @@ import { TextInputProps } from 'react-native';
 import { useTheme } from 'styled-components/native';
 
 import * as S from './styles';
-import { ProfileFormFields } from '../../screens/Profile/hooks/useForm';
+import { ProfileFormType } from '../../screens/Profile/schema-validation';
 
 interface Props extends TextInputProps {
-  name: keyof ProfileFormFields;
+  name: keyof ProfileFormType;
   iconName: React.ComponentProps<typeof Feather>['name']; // queremos tipar apenas os nomes dos icones
   control: any;
 }

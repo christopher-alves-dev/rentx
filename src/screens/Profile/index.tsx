@@ -5,7 +5,6 @@ import BottomSheet, {
 } from '@gorhom/bottom-sheet';
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 import { useNavigation } from '@react-navigation/core';
-import { compare } from 'bcryptjs';
 import React, { useCallback, useMemo, useRef, useState } from 'react';
 import { SubmitHandler } from 'react-hook-form';
 import {
@@ -27,7 +26,8 @@ import { RFValue } from 'react-native-responsive-fontsize';
 import Toast from 'react-native-root-toast';
 import { useTheme } from 'styled-components';
 
-import { ProfileFormFields, useFormProfile } from './hooks/useForm';
+import { useFormProfile } from './hooks/useForm';
+import { ProfileFormType } from './schema-validation';
 import * as S from './styles';
 import { BackButton } from '../../components/BackButton';
 import { BottomSheetPasswordInput } from '../../components/BottomSheetPasswordInput';
@@ -35,13 +35,13 @@ import { Button } from '../../components/Button';
 import { InputForm } from '../../components/InputForm';
 import { InputPasswordForm } from '../../components/InputPasswordForm';
 import { LoadAnimation } from '../../components/LoadAnimation';
-import { PasswordInput } from '../../components/PasswordInput';
 import { useAuth } from '../../hooks/auth';
+import api from '../../services/api';
 
 export function Profile() {
-  const { user, signOut } = useAuth();
+  const { user, signOut, validatePassword } = useAuth();
   const { formMethods } = useFormProfile();
-
+  const isFormToUpdatePassword = formMethods.watch('formType') === 'password';
   const formsScrollableContainer = useRef<ScrollView>(null);
   const [formSize, setFormSize] = useState(0);
 
@@ -55,46 +55,16 @@ export function Profile() {
   const tabBottomLineWidthAnimation = useSharedValue(100);
   const tabTitleAnimation = useSharedValue(0);
 
-  const submit: SubmitHandler<ProfileFormFields> = (formValues, e) => {
-    console.log({ aqui: formValues });
-  };
-
-  const onOpen = () => {
-    bottomSheetRef.current?.expand();
-  };
-
-  const theme = useTheme();
-  const navigation = useNavigation();
-
-  function handleBack() {
-    navigation.goBack();
-  }
-
-  const isPasswordCorrect = async () => {
-    let isValid = false;
-
-    isValid = await compare(
-      password,
-      '$2a$10$nXCkHcFjQKypL6/pBnTlJe76Gw3UentQLGyKwSa3ZNh1I0DKyedXi',
-    );
-
-    return isValid;
-  };
-
-  async function handleProfileUpdate() {
+  const handleUpdateData: SubmitHandler<ProfileFormType> = async formValues => {
+    Keyboard.dismiss();
     setLoading(true);
-    const isPasswordValid = await isPasswordCorrect();
-    if (!isPasswordValid) {
-      Toast.show('Senha incorreta', {
-        duration: Toast.durations.SHORT,
-        position: Toast.positions.TOP,
-        backgroundColor: theme.colors.main,
-        opacity: 1,
-      });
+    const isPasswordValid = await validatePassword({
+      email: formValues.email,
+      password: formValues.currentPassword!,
+    });
 
-      setLoading(false);
-      return;
-    }
+    if (!isPasswordValid) return;
+
     try {
       // const data = { name, driverLicense, email: user?.email, id: user?.id, password };
 
@@ -123,6 +93,60 @@ export function Profile() {
         opacity: 1,
       });
     }
+  };
+
+  const handleUpdatePassword: SubmitHandler<
+    ProfileFormType
+  > = async formValues => {
+    try {
+      setLoading(true);
+
+      const isPasswordValid = await validatePassword({
+        email: formValues.email,
+        password: formValues.currentPassword!,
+      });
+
+      if (!isPasswordValid) return;
+
+      if (formValues.newPassword !== formValues.newPasswordConfirmation) {
+        return Toast.show('A nova senha e confirmação são diferentes', {
+          duration: Toast.durations.LONG,
+          position: Toast.positions.TOP,
+          backgroundColor: theme.colors.main,
+          opacity: 1,
+        });
+      }
+
+      const data = {
+        password: formValues.newPassword,
+      };
+      api.patch(`/users/${user?.id}`, data);
+      Toast.show('Informações atualizadas com sucesso', {
+        duration: Toast.durations.SHORT,
+        position: Toast.positions.CENTER,
+        backgroundColor: theme.colors.success,
+      });
+    } catch (error) {
+      Toast.show('Erro ao tentar atualizar, tente novamente', {
+        duration: Toast.durations.SHORT,
+        position: Toast.positions.CENTER,
+        backgroundColor: theme.colors.main,
+        opacity: 1,
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleOpenBottomSheet = () => {
+    bottomSheetRef.current?.expand();
+  };
+
+  const theme = useTheme();
+  const navigation = useNavigation();
+
+  function handleBack() {
+    navigation.goBack();
   }
 
   const renderBackdrop = useCallback(
@@ -213,6 +237,7 @@ export function Profile() {
               </S.PhotoContainer>
             </S.Header>
 
+            {loading && <LoadAnimation text="Validando senha..." />}
             <S.Content>
               <S.Tabs>
                 <S.TabsWrapper>
@@ -234,8 +259,6 @@ export function Profile() {
                   ]}
                 />
               </S.Tabs>
-              {/* Adicionar tipo do form no react hook form, se for dados, eles são obrigatórios e de senha não,
-              se for de troca de senha, eles são obrigatórios e os de dados não. */}
               <ScrollView
                 horizontal
                 style={{
@@ -263,6 +286,7 @@ export function Profile() {
                     name="email"
                     iconName="mail"
                     keyboardType="email-address"
+                    autoCapitalize="none"
                   />
                   <InputForm
                     control={formMethods.control}
@@ -275,7 +299,6 @@ export function Profile() {
                 <S.Section
                   style={{
                     width: formSize,
-
                     alignItems: 'center',
                   }}
                 >
@@ -284,27 +307,42 @@ export function Profile() {
                     name="currentPassword"
                     iconName="lock"
                     placeholder="Senha atual"
+                    autoCapitalize="none"
                   />
                   <InputPasswordForm
                     control={formMethods.control}
                     name="newPassword"
                     iconName="lock"
                     placeholder="Nova senha"
+                    autoCapitalize="none"
                   />
                   <InputPasswordForm
                     control={formMethods.control}
                     name="newPasswordConfirmation"
                     iconName="lock"
                     placeholder="Repetir senha"
+                    autoCapitalize="none"
                   />
                 </S.Section>
               </ScrollView>
 
               <Button
                 title="SALVAR"
-                onPress={formMethods.handleSubmit(submit, invalid =>
-                  console.log({ invalid }),
-                )}
+                onPress={
+                  isFormToUpdatePassword
+                    ? formMethods.handleSubmit(data =>
+                        handleUpdatePassword({
+                          formType: data.formType,
+                          currentPassword: data.currentPassword!,
+                          email: data.email,
+                          name: data.name,
+                          newPassword: data.newPassword,
+                          newPasswordConfirmation: data.newPasswordConfirmation,
+                          driverLicense: data.driverLicense,
+                        }),
+                      )
+                    : handleOpenBottomSheet
+                }
               />
             </S.Content>
           </S.Container>
@@ -319,7 +357,7 @@ export function Profile() {
         backdropComponent={renderBackdrop}
       >
         {loading ? (
-          <LoadAnimation />
+          <LoadAnimation text="Validando senha..." />
         ) : (
           <View
             style={{
@@ -345,10 +383,9 @@ export function Profile() {
             >
               <Button
                 title="Confirmar"
-                onPress={async () => {
-                  Keyboard.dismiss();
-                  await handleProfileUpdate();
-                }}
+                onPress={formMethods.handleSubmit(handleUpdateData, invalid =>
+                  console.log({ invalid }),
+                )}
               />
             </View>
           </View>
