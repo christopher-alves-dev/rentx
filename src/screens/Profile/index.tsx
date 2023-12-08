@@ -54,22 +54,38 @@ export function Profile() {
   const tabBottomLineWidthAnimation = useSharedValue(100);
   const tabTitleAnimation = useSharedValue(0);
 
+  const goToNextStep = () => {
+    formMethods.setValue('formType', 'password');
+    tabBottomLineAnimation.value = withTiming(200);
+    tabBottomLineWidthAnimation.value = withTiming(175);
+    tabTitleAnimation.value = withTiming(1);
+    formsScrollableContainer?.current?.scrollToEnd();
+  };
+
+  const goToPreviousStep = () => {
+    formMethods.setValue('formType', 'data');
+    tabBottomLineAnimation.value = withTiming(0);
+    tabBottomLineWidthAnimation.value = withTiming(100);
+    tabTitleAnimation.value = withTiming(0);
+    formsScrollableContainer?.current?.scrollTo({ x: 0 });
+  };
+
   const handleUpdateData: SubmitHandler<ProfileFormType> = async formValues => {
     Keyboard.dismiss();
     setLoading(true);
-    console.log({ formValues });
     const isPasswordValid = await validatePassword({
-      email: formValues.email!,
+      email: formValues.user.email!,
       password: formValues.currentPasswordConfirmation!,
+      callback: () => setLoading(false),
     });
 
     if (!isPasswordValid) return;
 
     try {
       const data = {
-        name: formValues.name!,
-        driverLicense: formValues.driverLicense!,
-        email: formValues.email!,
+        name: formValues.user.name!,
+        driverLicense: formValues.user.driverLicense!,
+        email: formValues.user.email!,
       };
 
       await api.patch('/users/1', data);
@@ -78,20 +94,18 @@ export function Profile() {
         ...data,
       }));
 
-      formMethods.setValue('name', data.name);
-      formMethods.setValue('email', data.email);
-      formMethods.setValue('driverLicense', data.driverLicense);
+      formMethods.setValue('user', data);
       formMethods.resetField('currentPasswordConfirmation');
       Toast.show('Informações atualizadas com sucesso', {
-        duration: Toast.durations.SHORT,
+        duration: Toast.durations.LONG,
         position: Toast.positions.TOP,
         backgroundColor: theme.colors.success,
         opacity: 1,
       });
     } catch (error) {
       Toast.show('Erro ao tentar atualizar, tente novamente', {
-        duration: Toast.durations.SHORT,
-        position: Toast.positions.CENTER,
+        duration: Toast.durations.LONG,
+        position: Toast.positions.TOP,
         backgroundColor: theme.colors.main,
         opacity: 1,
       });
@@ -108,7 +122,7 @@ export function Profile() {
       setLoading(true);
 
       const isPasswordValid = await validatePassword({
-        email: formValues.email,
+        email: formValues.user.email,
         password: formValues.currentPassword!,
       });
 
@@ -126,16 +140,23 @@ export function Profile() {
       const data = {
         password: formValues.newPassword,
       };
-      api.patch(`/users/${user?.id}`, data);
+      await api.patch(`/users/${user?.id}`, data);
+
+      goToPreviousStep();
+      formMethods.resetField('currentPassword');
+      formMethods.resetField('newPassword');
+      formMethods.resetField('newPasswordConfirmation');
+
       Toast.show('Informações atualizadas com sucesso', {
-        duration: Toast.durations.SHORT,
-        position: Toast.positions.CENTER,
+        duration: Toast.durations.LONG,
+        position: Toast.positions.TOP,
         backgroundColor: theme.colors.success,
+        opacity: 1,
       });
     } catch (error) {
       Toast.show('Erro ao tentar atualizar, tente novamente', {
-        duration: Toast.durations.SHORT,
-        position: Toast.positions.CENTER,
+        duration: Toast.durations.LONG,
+        position: Toast.positions.TOP,
         backgroundColor: theme.colors.main,
         opacity: 1,
       });
@@ -165,22 +186,6 @@ export function Profile() {
     ),
     [],
   );
-
-  const goToNextStep = () => {
-    formMethods.setValue('formType', 'password');
-    tabBottomLineAnimation.value = withTiming(200);
-    tabBottomLineWidthAnimation.value = withTiming(175);
-    tabTitleAnimation.value = withTiming(1);
-    formsScrollableContainer?.current?.scrollToEnd();
-  };
-
-  const goToPreviousStep = () => {
-    formMethods.setValue('formType', 'data');
-    tabBottomLineAnimation.value = withTiming(0);
-    tabBottomLineWidthAnimation.value = withTiming(100);
-    tabTitleAnimation.value = withTiming(0);
-    formsScrollableContainer?.current?.scrollTo({ x: 0 });
-  };
 
   const tabBottomLineToNextStyle = useAnimatedStyle(() => {
     return {
@@ -284,19 +289,19 @@ export function Profile() {
                 >
                   <InputForm
                     control={formMethods.control}
-                    name="name"
+                    name="user.name"
                     iconName="user"
                   />
                   <InputForm
                     control={formMethods.control}
-                    name="email"
+                    name="user.email"
                     iconName="mail"
                     keyboardType="email-address"
                     autoCapitalize="none"
                   />
                   <InputForm
                     control={formMethods.control}
-                    name="driverLicense"
+                    name="user.driverLicense"
                     iconName="credit-card"
                     keyboardType="numeric"
                   />
@@ -340,11 +345,13 @@ export function Profile() {
                         handleUpdatePassword({
                           formType: data.formType,
                           currentPassword: data.currentPassword!,
-                          email: data.email,
-                          name: data.name,
+                          user: {
+                            email: data.user.email,
+                            name: data.user.name,
+                            driverLicense: data.user.driverLicense,
+                          },
                           newPassword: data.newPassword,
                           newPasswordConfirmation: data.newPasswordConfirmation,
-                          driverLicense: data.driverLicense,
                         }),
                       )
                     : handleOpenBottomSheet

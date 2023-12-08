@@ -1,24 +1,32 @@
 import { Feather } from '@expo/vector-icons';
 import React, { useState } from 'react';
-import { useController } from 'react-hook-form';
+import {
+  Control,
+  FieldPath,
+  FieldValues,
+  useController,
+} from 'react-hook-form';
 import { TextInputProps } from 'react-native';
 import { useTheme } from 'styled-components/native';
 
 import * as S from './styles';
-import { ProfileFormType } from '../../screens/Profile/schema-validation';
 
-interface Props extends TextInputProps {
-  name: keyof ProfileFormType;
-  iconName: React.ComponentProps<typeof Feather>['name']; // queremos tipar apenas os nomes dos icones
-  control: any;
+interface Props<T extends FieldValues> extends TextInputProps {
+  name: FieldPath<T>;
+  iconName: React.ComponentProps<typeof Feather>['name'];
+  control: Control<T>;
 }
 
-export const InputForm = ({ name, iconName, control, ...rest }: Props) => {
+export const InputForm = <T extends FieldValues>({
+  name,
+  iconName,
+  control,
+  ...rest
+}: Props<T>) => {
   const theme = useTheme();
   const { field } = useController({
     control,
     name,
-    defaultValue: '',
   });
 
   const [isFocused, setIsFocused] = useState(false);

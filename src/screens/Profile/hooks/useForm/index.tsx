@@ -10,9 +10,11 @@ export const useFormProfile = () => {
     resolver: yupResolver(profileSchema),
     defaultValues: {
       formType: 'data',
-      name: user?.name,
-      email: user?.email,
-      driverLicense: user?.driverLicense,
+      user: {
+        name: user?.name,
+        email: user?.email,
+        driverLicense: user?.driverLicense,
+      },
     },
   });
 

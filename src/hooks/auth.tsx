@@ -18,6 +18,7 @@ interface User {
 interface SignInCredentials {
   email: string;
   password: string;
+  callback?: () => void;
 }
 
 interface AuthContextData {
@@ -61,7 +62,11 @@ const AuthProvider = ({ children }: AuthProveiderProps) => {
     }
   };
 
-  const validatePassword = async ({ email, password }: SignInCredentials) => {
+  const validatePassword = async ({
+    email,
+    password,
+    callback,
+  }: SignInCredentials) => {
     try {
       const response = await api.post('/login', {
         email,
@@ -78,9 +83,9 @@ const AuthProvider = ({ children }: AuthProveiderProps) => {
             backgroundColor: theme.colors.main,
             opacity: 1,
           });
-
-          return false;
         }
+        callback && callback();
+
         console.error({ responseError: error.response });
       } else {
         console.error(error);
