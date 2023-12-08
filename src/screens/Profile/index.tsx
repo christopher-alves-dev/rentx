@@ -39,14 +39,13 @@ import { useAuth } from '../../hooks/auth';
 import api from '../../services/api';
 
 export function Profile() {
-  const { user, signOut, validatePassword } = useAuth();
+  const { user, setUser, signOut, validatePassword } = useAuth();
   const { formMethods } = useFormProfile();
   const isFormToUpdatePassword = formMethods.watch('formType') === 'password';
   const formsScrollableContainer = useRef<ScrollView>(null);
   const [formSize, setFormSize] = useState(0);
 
-  const [avatar, setAvatar] = useState(user?.avatar);
-  const [password, setPassword] = useState('');
+  const [avatar, setAvatar] = useState('user?.avatar');
   const [loading, setLoading] = useState(false);
   const bottomSheetRef = useRef<BottomSheet>(null);
   const snapPoints = useMemo(() => ['40%'], []);
@@ -58,33 +57,37 @@ export function Profile() {
   const handleUpdateData: SubmitHandler<ProfileFormType> = async formValues => {
     Keyboard.dismiss();
     setLoading(true);
+    console.log({ formValues });
     const isPasswordValid = await validatePassword({
-      email: formValues.email,
-      password: formValues.currentPassword!,
+      email: formValues.email!,
+      password: formValues.currentPasswordConfirmation!,
     });
 
     if (!isPasswordValid) return;
 
     try {
-      // const data = { name, driverLicense, email: user?.email, id: user?.id, password };
+      const data = {
+        name: formValues.name!,
+        driverLicense: formValues.driverLicense!,
+        email: formValues.email!,
+      };
 
-      // api.put('/users/1', data)
+      await api.patch('/users/1', data);
+      setUser(oldState => ({
+        id: oldState?.id as string,
+        ...data,
+      }));
 
-      // Toast.show('Informações atualizadas com sucesso', {
-      //   duration: Toast.durations.SHORT,
-      //   position: Toast.positions.CENTER,
-      //   backgroundColor: theme.colors.success
-      // })
-
+      formMethods.setValue('name', data.name);
+      formMethods.setValue('email', data.email);
+      formMethods.setValue('driverLicense', data.driverLicense);
+      formMethods.resetField('currentPasswordConfirmation');
       Toast.show('Informações atualizadas com sucesso', {
         duration: Toast.durations.SHORT,
         position: Toast.positions.TOP,
         backgroundColor: theme.colors.success,
         opacity: 1,
       });
-      setLoading(false);
-
-      bottomSheetRef.current?.close();
     } catch (error) {
       Toast.show('Erro ao tentar atualizar, tente novamente', {
         duration: Toast.durations.SHORT,
@@ -92,11 +95,14 @@ export function Profile() {
         backgroundColor: theme.colors.main,
         opacity: 1,
       });
+    } finally {
+      setLoading(false);
+      bottomSheetRef.current?.close();
     }
   };
 
   const handleUpdatePassword: SubmitHandler<
-    ProfileFormType
+    Omit<ProfileFormType, 'currentPasswordConfirmation'>
   > = async formValues => {
     try {
       setLoading(true);

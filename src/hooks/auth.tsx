@@ -12,12 +12,7 @@ interface User {
   email: string;
   name: string;
   driverLicense: string;
-  avatar: string;
-}
-
-interface AuthState {
-  token: string;
-  user: User;
+  // avatar: string;
 }
 
 interface SignInCredentials {
@@ -26,7 +21,8 @@ interface SignInCredentials {
 }
 
 interface AuthContextData {
-  user: User | undefined;
+  user: User | null;
+  setUser: React.Dispatch<React.SetStateAction<User | null>>;
   signIn: (credentials: SignInCredentials) => Promise<void>;
   signOut: () => void;
   validatePassword: (credentials: SignInCredentials) => Promise<boolean>;
@@ -40,7 +36,7 @@ const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
 const AuthProvider = ({ children }: AuthProveiderProps) => {
   const theme = useTheme();
-  const [data, setData] = useState<AuthState | undefined>(undefined);
+  const [data, setData] = useState<User | null>(null);
 
   const signIn = async ({ email, password }: SignInCredentials) => {
     try {
@@ -51,9 +47,7 @@ const AuthProvider = ({ children }: AuthProveiderProps) => {
 
       console.log({ res: response.data });
 
-      const { token, user } = response.data;
-      api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-      setData({ token, user });
+      setData(response.data.user);
     } catch (error) {
       if (error instanceof Yup.ValidationError) {
         Alert.alert('Opa', error.message);
@@ -74,7 +68,7 @@ const AuthProvider = ({ children }: AuthProveiderProps) => {
         password,
       });
 
-      return data?.user.email === email && response.data.accessToken;
+      return data?.email === email && response.data.accessToken;
     } catch (error) {
       if (axios.isAxiosError(error)) {
         if (error.response?.status === 400) {
@@ -95,13 +89,14 @@ const AuthProvider = ({ children }: AuthProveiderProps) => {
   };
 
   const signOut = () => {
-    setData(undefined);
+    setData(null);
   };
 
   return (
     <AuthContext.Provider
       value={{
-        user: data?.user,
+        user: data,
+        setUser: setData,
         signIn,
         signOut,
         validatePassword,
