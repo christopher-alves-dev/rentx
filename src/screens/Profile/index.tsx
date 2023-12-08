@@ -370,10 +370,11 @@ export function Profile() {
               Digite sua senha para confirmar as alterações.
             </S.BottomSheetMessage>
             <BottomSheetPasswordInput
+              control={formMethods.control}
+              name="currentPasswordConfirmation"
               iconName="lock"
+              autoCapitalize="none"
               placeholder="Senha"
-              onChangeText={setPassword}
-              value={password}
             />
             <View
               style={{
